@@ -1,0 +1,26 @@
+{
+  "name": "cloud-config-toolkit",
+  "version": "0.0.1",
+  "description": "Cloud toolkit to manage configuration files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ocoboco/cloud-config-toolkit.git"
+  },
+  "keywords": [
+    "config",
+    "toolkit",
+    "download",
+    "validate",
+    "backup"
+  ],
+  "author": "Dmitri Pavlutin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ocoboco/cloud-config-toolkit/issues"
+  },
+  "homepage": "https://github.com/ocoboco/cloud-config-toolkit#readme"
+}
