@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/ocoboco/cloud-config-toolkit#readme",
   "devDependencies": {
-    "lerna": "^2.11.0"
+    "lerna": "2.11.0"
   }
 }
