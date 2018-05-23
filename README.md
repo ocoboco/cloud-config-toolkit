@@ -47,6 +47,23 @@ cct export --dest computedConfig.json --version <version> [--namespace=<namespac
 cct export config.json --dest computedConfig.json
 ```
 
-## Toolking config `cct-config.js`
+## Toolkit config `cct-config.js`
 
 In order to use Cloud config toolkit, create a configuration file `cct-config.js` in the root directory of the project.
+
+```javascript
+// `cct-config.js`
+const GaeStorage = require('cloud-config-toolkit-gae-storage');
+const Env = require('cloud-config-toolkit-env');
+
+module.exports = {
+  storage: GaeStorage,
+  env: Env,
+  compute(storageFacade, env) {
+    const namespace = 'BACKUPS';
+    const latestVersion = await facade.fetchVersion(LATEST);
+     // ...
+    await facade.export(latestVersion, 'dest/config.json');
+  }
+}
+```
