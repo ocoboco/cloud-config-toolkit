@@ -4,7 +4,8 @@ Cloud config toolkit facilitates the deployment of any type configuration files.
 
 ## Features
 
-
+* Store any type of configuration file on a remote storage by version and namespace
+* Management of computed configuration that requires transformations in order to be used by the application (e.g. fill with defaults).
 
 ## Commands
 
@@ -45,3 +46,7 @@ cct export --dest computedConfig.json --version <version> [--namespace=<namespac
 ```
 cct export config.json --dest computedConfig.json
 ```
+
+## Toolking config `cct-config.js`
+
+In order to use Cloud config toolkit, create a configuration file `cct-config.js` in the root directory of the project.
