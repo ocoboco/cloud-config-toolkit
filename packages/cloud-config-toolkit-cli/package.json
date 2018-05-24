@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/ocoboco/cloud-config-toolkit#readme",
   "dependencies": {
+    "chalk": "^2.4.1",
     "yargs": "11.0.0"
   }
 }

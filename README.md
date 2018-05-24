@@ -43,7 +43,7 @@ cct export --dest computedConfig.json --version <version> [--namespace=<namespac
 
 6) (When computed configuration is enabled) Get the computed configuration file from the configuration file:
 
-```
+```bash
 cct export config.json --dest computedConfig.json
 ```
 
