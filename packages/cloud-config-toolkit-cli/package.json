@@ -31,7 +31,7 @@
   "homepage": "https://github.com/ocoboco/cloud-config-toolkit#readme",
   "dependencies": {
     "chalk": "^2.4.1",
-    "resolve-cwd": "^2.0.0",
+    "import-cwd": "^2.1.0",
     "yargs": "^11.0.0"
   }
 }
