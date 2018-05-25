@@ -17,7 +17,7 @@ try {
     console.log(chalk.red('Error: ') + 
     chalk.yellow('cloud-config-toolkit') + 
     ' module not found. You might need to run ' +
-    chalk.green('npm install --save cloud-config-toolkit')
+    chalk.green('npm install --save-dev cloud-config-toolkit')
     );
   }
   throw error;
