@@ -35,21 +35,27 @@ cct download --dest config.json --version <version> [--namespace=<namespace>]
 cct ls [--namespace=<namespace>]
 ```
 
-5) Get the computed configuration file from remote storage:
+5) Get the exported configuration file from remote storage:
 
 ```bash
-cct compute --dest computedConfig.json --version <version> [--namespace=<namespace>]
+cct export --dest computedConfig.json --version <version> [--namespace=<namespace>]
 ```
 
-Note: available when `config.compute` is specified.
+Note: available when `config.export` is specified.
 
-6) Get the computed configuration file from the configuration file:
+6) Get the exported configuration file from the configuration file:
 
 ```bash
-cct compute config.json --dest computedConfig.json
+cct export config.json --dest computedConfig.json
 ```
 
-Note: available when `config.compute` is specified.
+7) Use custom commands to manage configuration with custom logic:
+
+```bash
+cct custom commandName --param1 value1
+```
+
+Note: available when `config.export` is specified.
 
 ## Toolkit config `cct-config.js`
 
@@ -70,7 +76,7 @@ module.exports = {
       // ...
     }
   ),
-  compute: new Modification({
+  export: new Modification({
     schema: {
       // ...
     }
@@ -79,7 +85,10 @@ module.exports = {
 }
 ```
 
-`config.storage` (obligatory) uses the following interface:
+### `config.storage` (required)
+
+`storage` property value must be an object that conforms to `Storage` interface.  
+Its purpose is to save configuration content on a storage.
 
 ```
 interface Storage {
@@ -90,7 +99,10 @@ interface Storage {
 }
 ```
 
-`config.validation` (obligatory) uses the following interface:
+### `config.validation` (required)
+
+`validation` property value must be an object that conforms to `Validation` interface.  
+Its purpose is to validate the configuration against some schema or validation rules.  
 
 ```
 interface Validation {
@@ -99,18 +111,39 @@ interface Validation {
 }
 ```
 
-`config.compute` (optional) uses the following interface:
+### `config.export` (optional)
+
+`export` property value must be an object that conforms to `Export` interface.  
+Use this property to modify the original configuration file, e.g. fill with default values.
 
 ```
-interface Compute {
-  function getComputedContent(content)
+interface Export {
+  function getExportedContent(content)
 }
 ```
 
-`config.env` (optional) uses the following interface:
+### `config.env` (optional)
+
+`env` property value must be an object that conforms to `Env` interface.  
+Use this property to specify how to access environment variables.  
 
 ```
 interface Env {
   function getVariables()
+}
+```
+
+### `config.customCommands` (optional)
+
+`customCommands` is an object with methods that describe custom commands.
+
+```javascript
+customCommands: {
+  commandName1(facade, params) {
+    // ...
+  },
+  commandName2(facade, params) {
+    // ...
+  }
 }
 ```
