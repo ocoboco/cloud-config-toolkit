@@ -52,7 +52,7 @@ cct export config.json --dest computedConfig.json
 7) Use custom commands to manage configuration with custom logic:
 
 ```bash
-cct custom commandName --param1 value1
+cct commandName --param1 value1 --param2 value2
 ```
 
 Note: available when `config.export` is specified.
@@ -81,7 +81,12 @@ module.exports = {
       // ...
     }
   }),
-  env: new Env()
+  env: new Env(),
+  commands: {
+    commandName(facade, params) {
+      
+    }
+  }
 }
 ```
 
@@ -133,12 +138,13 @@ interface Env {
 }
 ```
 
-### `config.customCommands` (optional)
+### `config.commands` (optional)
 
-`customCommands` is an object with methods that describe custom commands.
+`commands` is an object with methods that describe custom additional commands.
+Choose any command name other than `push`, `download`, `ls` and `export`.
 
 ```javascript
-customCommands: {
+commands: {
   commandName1(facade, params) {
     // ...
   },
