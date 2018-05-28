@@ -35,17 +35,21 @@ cct download --dest config.json --version <version> [--namespace=<namespace>]
 cct ls [--namespace=<namespace>]
 ```
 
-5) (When computed configuration is enabled) Get the computed configuration file from remote storage : 
+5) Get the computed configuration file from remote storage:
 
 ```bash
-cct export --dest computedConfig.json --version <version> [--namespace=<namespace>]
+cct compute --dest computedConfig.json --version <version> [--namespace=<namespace>]
 ```
 
-6) (When computed configuration is enabled) Get the computed configuration file from the configuration file:
+Note: available when `config.compute` is specified.
+
+6) Get the computed configuration file from the configuration file:
 
 ```bash
-cct export config.json --dest computedConfig.json
+cct compute config.json --dest computedConfig.json
 ```
+
+Note: available when `config.compute` is specified.
 
 ## Toolkit config `cct-config.js`
 
@@ -55,15 +59,58 @@ In order to use Cloud config toolkit, create a configuration file `cct-config.js
 // `cct-config.js`
 const GaeStorage = require('cloud-config-toolkit-gae-storage');
 const Env = require('cloud-config-toolkit-env');
+const { Validation, Modification } = require('cloud-config-toolkit-ajv');
 
 module.exports = {
-  storage: GaeStorage,
-  env: Env,
-  compute(storageFacade, env) {
-    const namespace = 'BACKUPS';
-    const latestVersion = await facade.fetchVersion(LATEST);
-     // ...
-    await facade.export(latestVersion, 'dest/config.json');
-  }
+  storage: new GaeStorage({
+    key: 'key'
+  }),
+  validation: new Validation(
+    schema: {
+      // ...
+    }
+  ),
+  compute: new Modification({
+    schema: {
+      // ...
+    }
+  }),
+  env: new Env()
+}
+```
+
+`config.storage` (obligatory) uses the following interface:
+
+```
+interface Storage {
+  async function createItem(content, name, namespace)
+  async function getItemContent(name, namespace)
+  async function itemExists(name, namespace)
+  async function getItemNames(namespace, offset, limit)
+}
+```
+
+`config.validation` (obligatory) uses the following interface:
+
+```
+interface Validation {
+  function isValid(content)
+  function getValidationErrors(content)
+}
+```
+
+`config.compute` (optional) uses the following interface:
+
+```
+interface Compute {
+  function getComputedContent(content)
+}
+```
+
+`config.env` (optional) uses the following interface:
+
+```
+interface Env {
+  function getVariables()
 }
 ```
