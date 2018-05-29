@@ -1,11 +1,14 @@
 # Cloud config toolkit
 
-Cloud config toolkit facilitates the deployment of any type configuration files.
+Cloud config toolkit facilitates deployment, validation and transformation of configuration files.  
 
 ## Features
 
-* Store any type of configuration file on a remote storage by version and namespace
-* Management of computed configuration that requires transformations in order to be used by the application (e.g. fill with defaults).
+* Save your configuration file on remote *storage* by version and namespace
+* *Validate* the configuration file
+* Custom *transformations* of configuration file (e.g. fill with defaults)
+* Extend the toolkit with your *own commands*
+* *Not coupled* with anything particular: implement the storage and validation interfaces with your favorite libraries.
 
 ## Commands
 
@@ -35,27 +38,23 @@ cct download --dest config.json --version <version> [--namespace=<namespace>]
 cct ls [--namespace=<namespace>]
 ```
 
-5) Get the exported configuration file from remote storage:
+5) Get the exported configuration file from remote storage (available when `config.export` is specified):
 
 ```bash
-cct export --dest computedConfig.json --version <version> [--namespace=<namespace>]
+cct export --dest exportedConfig.json --version <version> [--namespace=<namespace>]
 ```
 
-Note: available when `config.export` is specified.
-
-6) Get the exported configuration file from the configuration file:
+6) Get the exported configuration file from the configuration file (available when `config.export` is specified):
 
 ```bash
-cct export config.json --dest computedConfig.json
+cct export config.json --dest exportedConfig.json
 ```
 
-7) Use custom commands to manage configuration with custom logic:
+7) User defined commands to manage configuration with custom logic (available when `config.commands` is specified):
 
 ```bash
 cct commandName --param1 value1 --param2 value2
 ```
-
-Note: available when `config.export` is specified.
 
 ## Toolkit config `cct-config.js`
 
@@ -93,7 +92,7 @@ module.exports = {
 ### `config.storage` (required)
 
 `storage` property value must be an object that conforms to `Storage` interface.  
-Its purpose is to save configuration content on a storage.
+Its purpose is to save configuration content on any type storage.
 
 ```
 interface Storage {
@@ -119,7 +118,7 @@ interface Validation {
 ### `config.export` (optional)
 
 `export` property value must be an object that conforms to `Export` interface.  
-Use this property to modify the original configuration file, e.g. fill with default values.
+Use this property to transform the original configuration file, e.g. fill with default values.
 
 ```
 interface Export {
@@ -140,8 +139,8 @@ interface Env {
 
 ### `config.commands` (optional)
 
-`commands` is an object with methods that describe custom additional commands.
-Choose any command name other than `push`, `download`, `ls` and `export`.
+`commands` is an object which methods implement custom commands.  
+Any command name can be used, other than `push`, `download`, `ls` and `export`.  
 
 ```javascript
 commands: {
