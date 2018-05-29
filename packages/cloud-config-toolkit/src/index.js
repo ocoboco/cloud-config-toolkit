@@ -1,4 +1,4 @@
-export class Toolkit {
+class Toolkit {
   constructor(cctConfig) {
     this.cctConfig = cctConfig;
   }
@@ -7,3 +7,5 @@ export class Toolkit {
     
   }
 }
+
+module.exports = Toolkit;
