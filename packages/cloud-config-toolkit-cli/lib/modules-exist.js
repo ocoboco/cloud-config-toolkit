@@ -1,6 +1,6 @@
 const importCwd = require('import-cwd');
 
-module.exports = function verifyModulesExistence(modules) {
+module.exports = function modulesExist(modules) {
   for (let index = 0; index < modules.length; index++) {
     const modulePath = modules[index];
     try {

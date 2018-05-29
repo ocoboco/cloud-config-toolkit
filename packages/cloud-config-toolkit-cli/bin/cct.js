@@ -3,9 +3,9 @@
 const yargs = require('yargs');
 const chalk = require('chalk');
 
-const verifyModulesExistence = require('../lib/verify-modules-existence');
+const modulesExist = require('../lib/modulesExist');
 
-const result = verifyModulesExistence([
+const result = modulesExist([
   './cct-config.js',
   'cloud-config-toolkit'
 ]);
