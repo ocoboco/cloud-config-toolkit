@@ -1,27 +1,19 @@
 const Ajv = require('ajv');
 
 class AjvCreator {
-  constructor(keywords) {
-    this.keywords = keywords;
-    this.createAjvInstance();
-  }
-
-  createAjvInstance() {
-    this.ajvInstance = new Ajv({
+  static create(keywords) {
+    const ajvInstance = new Ajv({
       useDefaults: true
     });
-    this.addCustomKeywords();
+    this.addCustomKeywords(ajvInstance, keywords);
+    return ajvInstance;
   }
 
-  addCustomKeywords() {
-    this.keywords.forEach(({ name, props }) => {
-      this.ajvInstance.addKeyword(name, props);      
+  static addCustomKeywords(ajvInstance, keywords) {
+    keywords.forEach(({ name, props }) => {
+      ajvInstance.addKeyword(name, props);      
     });
-  }
-
-  getAjvInstance() {
-    return this.ajvInstance;
   }
 }
 
-module.exports = Validation;
+module.exports = AjvCreator;
