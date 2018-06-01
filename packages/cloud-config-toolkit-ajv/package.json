@@ -1,0 +1,29 @@
+{
+  "name": "cloud-config-toolkit-ajv",
+  "version": "0.0.1",
+  "description": "Cloud config toolkit ajv integration",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ocoboco/cloud-config-toolkit.git"
+  },
+  "main": "index.js",
+  "keywords": [
+    "config",
+    "toolkit",
+    "validate"
+  ],
+  "engines": {
+    "node": ">=8.3"
+  },
+  "author": "Dmitri Pavlutin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ocoboco/cloud-config-toolkit/issues"
+  },
+  "homepage": "https://github.com/ocoboco/cloud-config-toolkit#readme",
+  "dependencies": {
+  }
+}

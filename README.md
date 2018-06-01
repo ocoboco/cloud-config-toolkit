@@ -8,7 +8,7 @@ Cloud config toolkit facilitates deployment, validation and transformation of co
 * *Validate* the configuration file
 * Custom *transformations* of configuration file (e.g. fill with defaults)
 * Extend the toolkit with your *own commands*
-* *Not coupled* with anything particular: implement the storage and validation interfaces with your favorite libraries.
+* *Not coupled* with anything particular: implement storage and validation interfaces with your favorite libraries.
 
 ## Commands
 
@@ -96,10 +96,10 @@ Its purpose is to save configuration content on any type storage.
 
 ```
 interface Storage {
-  async function createItem(content, name, namespace)
-  async function getItemContent(name, namespace)
-  async function itemExists(name, namespace)
-  async function getItemNames(namespace, offset, limit)
+  function createItem(content, name, namespace)
+  function getItemContent(name, namespace)
+  function itemExists(name, namespace)
+  function getItemNames(namespace, offset, limit)
 }
 ```
 
@@ -122,7 +122,7 @@ Use this property to transform the original configuration file, e.g. fill with d
 
 ```
 interface Export {
-  function getExportedContent(content)
+  function export(content)
 }
 ```
 
