@@ -9,7 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/ocoboco/cloud-config-toolkit.git"
   },
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "keywords": [
     "config",
     "toolkit",

@@ -98,7 +98,7 @@ Its purpose is to save configuration content on any type storage.
 
 ```
 interface Storage {
-  function createItem(content, name, namespace)
+  function createItem(string, name, namespace)
   function getItemContent(name, namespace)
   function itemExists(name, namespace)
   function getItemNames(namespace, offset, limit)
@@ -112,14 +112,14 @@ Its purpose is to validate the configuration against some schema or validation r
 
 ```
 interface Validation {
-  function isValid(content)
-  function getErrors(content)
+  function isValid(configuration)
+  function getErrors(configuration)
 }
 ```
 
 ### `config.serialize` (required, defaults to `JSON.serialize`)
 
-`serialize` is a function that serialized the configuration object.  
+`serialize` is a function that serializes the configuration object into a raw string representation.  
 
 ```
 function serialize(configuration)
@@ -127,10 +127,10 @@ function serialize(configuration)
 
 ### `config.deserialize` (required, defaults to `JSON.parse`)
 
-`deserialize` is a function that derserializes the configuration object.
+`deserialize` is a function that deserializes a raw string representation into the configuration object.  
 
 ```
-function deserialize(configurationString)
+function deserialize(string)
 ```
 
 ### `config.export` (optional)
@@ -140,7 +140,7 @@ Use this property to transform the original configuration file, e.g. fill with d
 
 ```
 interface Export {
-  function export(content)
+  function export(configuration)
 }
 ```
 
