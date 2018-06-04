@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exporter exports valid configuration 1`] = `
+Object {
+  "settings": Object {
+    "hostname": "google.com",
+    "port": 80,
+  },
+}
+`;
