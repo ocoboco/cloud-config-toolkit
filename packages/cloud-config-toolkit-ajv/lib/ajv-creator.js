@@ -10,8 +10,8 @@ class AjvCreator {
   }
 
   static addCustomKeywords(ajvInstance, keywords) {
-    keywords.forEach(({ name, props }) => {
-      ajvInstance.addKeyword(name, props);      
+    keywords.forEach(({ name, definition }) => {
+      ajvInstance.addKeyword(name, definition);      
     });
   }
 }
