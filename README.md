@@ -111,7 +111,7 @@ Its purpose is to validate the configuration against some schema or validation r
 ```
 interface Validation {
   function isValid(content)
-  function getValidationErrors(content)
+  function getErrors(content)
 }
 ```
 

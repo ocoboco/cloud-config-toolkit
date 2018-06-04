@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "settings": {
+      "type": "object",
+      "required": ["hostname", "port"],
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "format": "hostname",
+          "minLength": 3
+        },
+        "port": {
+          "range": [0, 65535],
+          "default": 80
+        }
+      }
+    }
+  }
+}

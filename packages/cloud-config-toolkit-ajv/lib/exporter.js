@@ -1,6 +1,6 @@
 const AjvCreator = require('./ajv-creator');
 
-class Modification {
+class Exporter {
   constructor({ schema, keywords = [] }) {
     this.schema = schema;
     this.ajvInstance = AjvCreator.creator(keywords);
@@ -16,4 +16,4 @@ class Modification {
   }
 }
 
-module.exports = Modification;
+module.exports = Exporter;

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Validator invalidates invalid configuration 1`] = `
+Array [
+  Object {
+    "dataPath": ".settings",
+    "keyword": "required",
+    "message": "should have required property 'hostname'",
+    "params": Object {
+      "missingProperty": "hostname",
+    },
+    "schemaPath": "#/properties/settings/required",
+  },
+]
+`;
