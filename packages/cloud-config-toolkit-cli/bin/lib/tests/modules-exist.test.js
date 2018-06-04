@@ -12,10 +12,12 @@ describe('modulesExist()', function() {
   });
 });
 
+const dir = process.cwd();
+
 beforeAll(function() {
-  process.chdir('./fixtures');
+  process.chdir(__dirname + '/fixtures');
 });
 
 afterAll(function() {
-  process.chdir('..');
+  process.chdir(dir);
 });

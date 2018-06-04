@@ -1,5 +1,5 @@
 class ActionValidate {
-  constructor(deserialize, validator) {
+  constructor({ deserialize, validator }) {
     this.desearialize = this.desearialize;
     this.validator = this.validator;
   }
