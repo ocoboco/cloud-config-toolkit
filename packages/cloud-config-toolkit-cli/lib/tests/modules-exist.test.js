@@ -3,7 +3,7 @@ const modulesExist = require('../modules-exist');
 describe('modulesExist()', function() {
   test('returns an error for missing modules', function() {
     const { error, modulePath } = modulesExist(['./cct-config.js', './non-existing.js']);
-    expect(error).toBeDefined();
+    expect(error.code).toBe('MODULE_NOT_FOUND');
     expect(modulePath).toEqual('./non-existing.js');
   });
 

@@ -85,7 +85,9 @@ module.exports = {
     commandName(facade, params) {
       
     }
-  }
+  },
+  serialize: JSON.stringify,
+  deserialize: JSON.parse
 };
 ```
 
@@ -113,6 +115,22 @@ interface Validation {
   function isValid(content)
   function getErrors(content)
 }
+```
+
+### `config.serialize` (required, defaults to `JSON.serialize`)
+
+`serialize` is a function that serialized the configuration object.  
+
+```
+function serialize(configuration)
+```
+
+### `config.deserialize` (required, defaults to `JSON.parse`)
+
+`deserialize` is a function that derserializes the configuration object.
+
+```
+function deserialize(configurationString)
 ```
 
 ### `config.export` (optional)
