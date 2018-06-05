@@ -21,7 +21,7 @@ describe('Exporter', function() {
       keywords
     });
     expect(function() {
-      expect(exporter.export(invalidConfig)).toMatchSnapshot();
+      exporter.export(invalidConfig);
     }).toThrow('invalid');
   });
 });

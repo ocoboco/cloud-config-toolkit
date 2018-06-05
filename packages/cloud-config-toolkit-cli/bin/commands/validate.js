@@ -1,3 +1,5 @@
+const toolkit = require('../toolkit-instance');
+
 exports.command = 'validate <configPath>'
 exports.desc = 'Validate the configuration file';
 

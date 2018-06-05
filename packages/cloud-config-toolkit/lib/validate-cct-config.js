@@ -1,19 +1,19 @@
 const Interface = require('./interface');
 
-const ValidationInterface = new Interface('Validation', [
+const ValidatorInterface = new Interface('Validator', [
   'isValid',
   'getErrors'
 ]);
 
 module.exports = function validateCctConfig({
-  validation,
+  validator,
   serialize,
   deserialize
 } = {}) {
-  if (typeof validation !== 'object') {
-    throw new Error('config.validation is not provided.');
+  if (typeof validator !== 'object') {
+    throw new Error('config.validator is not provided.');
   }
-  Interface.ensureImplements(validation, ValidationInterface);
+  Interface.ensureImplements(validator, ValidatorInterface);
   if (typeof serialize !== 'function') {
     throw new Error('config.serialize function is not provided.');
   }

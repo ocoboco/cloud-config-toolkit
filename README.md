@@ -70,15 +70,11 @@ module.exports = {
   storage: new GaeStorage({
     key: 'key'
   }),
-  validation: new Validation(
-    schema: {
-      // ...
-    }
+  validator: new Validator(
+    // ...
   ),
-  export: new Modification({
-    schema: {
-      // ...
-    }
+  exporter: new Exporter({
+    // ...
   }),
   env: new Env(),
   commands: {
@@ -105,13 +101,13 @@ interface Storage {
 }
 ```
 
-### `config.validation` (required)
+### `config.validator` (required)
 
-`validation` property value must be an object that conforms to `Validation` interface.  
+`validator` property value must be an object that conforms to `Validator` interface.  
 Its purpose is to validate the configuration against some schema or validation rules.  
 
 ```
-interface Validation {
+interface Validator {
   function isValid(configuration)
   function getErrors(configuration)
 }
@@ -133,13 +129,13 @@ function serialize(configuration)
 function deserialize(string)
 ```
 
-### `config.export` (optional)
+### `config.exporter` (optional)
 
-`export` property value must be an object that conforms to `Export` interface.  
+`exporter` property value must be an object that conforms to `Exporter` interface.  
 Use this property to transform the original configuration file, e.g. fill with default values.
 
 ```
-interface Export {
+interface Exporter {
   function export(configuration)
 }
 ```

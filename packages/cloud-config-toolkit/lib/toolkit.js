@@ -1,11 +1,19 @@
 const validateCctConfig = require('./validate-cct-config');
 const ActionValidate = require('./actions/validate');
 
-class ToolkitFacade {
+class Toolkit {
   constructor(cctConfig) {
-    this.cctConfig = cctConfig;
+    this.cctConfig = this.fillWithDefaults(cctConfig);
     validateCctConfig(cctConfig);
     this.createActions();
+  }
+
+  fillWithDefaults(cctConfig) {
+    return {
+      serialize: JSON.serialize,
+      deserialize: JSON.deserialize,
+      ...cctConfig
+    };
   }
 
   createActions() {

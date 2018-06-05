@@ -1,14 +1,14 @@
-const modulesExist = require('../modules-exist');
+const modulesAvailable = require('../modules-available');
 
-describe('modulesExist()', function() {
+describe('modulesAvailable()', function() {
   test('returns an error for missing modules', function() {
-    const { error, modulePath } = modulesExist(['./cct-config.js', './non-existing.js']);
+    const { error, modulePath } = modulesAvailable(['./cct-config.js', './non-existing.js']);
     expect(error.code).toBe('MODULE_NOT_FOUND');
     expect(modulePath).toEqual('./non-existing.js');
   });
 
   test('returns null for existing modules', function() {
-    expect(modulesExist(['./cct-config.js'])).toBeNull();
+    expect(modulesAvailable(['./cct-config.js'])).toBeNull();
   });
 });
 

@@ -3,9 +3,9 @@
 const yargs = require('yargs');
 const chalk = require('chalk');
 
-const modulesExist = require('./modulesExist');
+const modulesAvailable = require('./modules-available');
 
-const result = modulesExist([
+const result = modulesAvailable([
   './cct-config.js',
   'cloud-config-toolkit'
 ]);
@@ -13,7 +13,7 @@ const result = modulesExist([
 if (result != null) {
   const { error, modulePath } = result;
   if (error.code === 'MODULE_NOT_FOUND') {
-    console.log(chalk.red('Error: ') + chalk.yellow(modulePath) + ' not found in the project directory\n');
+    console.log(chalk.red('Error: ') + chalk.green(modulePath) + ' not found in the project directory.\n');
   }
   throw error;
 }
