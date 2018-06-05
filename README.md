@@ -113,7 +113,7 @@ interface Validator {
 }
 ```
 
-### `config.serialize` (required, defaults to `JSON.serialize`)
+### `config.serialize` (required, defaults to `JSON.stringify`)
 
 `serialize` is a function that serializes the configuration object into a raw string representation.  
 

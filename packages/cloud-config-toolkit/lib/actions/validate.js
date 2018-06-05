@@ -24,4 +24,4 @@ class ActionValidate {
   }
 }
 
-module.exports = Validate;
+module.exports = ActionValidate;

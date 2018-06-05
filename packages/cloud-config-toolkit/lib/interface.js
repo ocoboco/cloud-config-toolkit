@@ -22,17 +22,17 @@ class Interface {
     }
 
     for (let i = 1, len = arguments.length; i < len; i++) {
-      let interface = arguments[i];
-      if (interface.constructor !== Interface) {
+      let interf = arguments[i];
+      if (interf.constructor !== Interface) {
         throw new Error("Function Interface.ensureImplements expects arguments "
           + "two and above to be instances of Interface.");
       }
 
-      for (let j = 0, methodsLen = interface.methods.length; j < methodsLen; j++) {
-        let method = interface.methods[j];
+      for (let j = 0, methodsLen = interf.methods.length; j < methodsLen; j++) {
+        let method = interf.methods[j];
         if (!object[method] || typeof object[method] !== 'function') {
           throw new Error("Function Interface.ensureImplements: object "
-            + "does not implement the " + interface.name
+            + "does not implement the " + interf.name
             + " interface. Method " + method + " was not found.");
         }
       }
