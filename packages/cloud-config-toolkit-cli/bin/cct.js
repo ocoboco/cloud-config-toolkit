@@ -3,7 +3,7 @@
 const yargs = require('yargs');
 const chalk = require('chalk');
 
-const modulesExist = require('../lib/modulesExist');
+const modulesExist = require('./modulesExist');
 
 const result = modulesExist([
   './cct-config.js',
