@@ -1,11 +1,9 @@
 class ActionValidate {
-  constructor({ deserialize, validator }) {
-    this.desearialize = this.desearialize;
-    this.validator = this.validator;
+  constructor({ validator }) {
+    this.validator = validator;
   }
 
-  validate(string) {
-    const configuration = this.getConfiguration(string);
+  validate(configuration) {
     const isValid = this.validator.isValid(configuration);
     if (isValid) {
       return {
@@ -17,10 +15,6 @@ class ActionValidate {
       isValid,
       errors: this.validator.getErrors(configuration)
     };
-  }
-
-  getConfiguration(string) {
-    return this.desearialize(string);
   }
 }
 
