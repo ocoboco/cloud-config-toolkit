@@ -13,10 +13,10 @@ class Toolkit {
       ...cctConfig
     };
     checkCctConfig(this.cctConfig);
-    this.createActions();
+    this.createDelegates();
   }
 
-  createActions() {
+  createDelegates() {
     const { validator } = this.cctConfig;
     this.validatorDelegate = new ValidatorDelegate({ validator });
   }
