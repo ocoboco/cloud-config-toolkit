@@ -5,7 +5,7 @@ const Validator = new Interface('Validator', [
   'getErrors'
 ]);
 
-module.exports = function validateCctConfig({
+module.exports = function checkCctConfig({
   validator,
   serialize,
   deserialize
