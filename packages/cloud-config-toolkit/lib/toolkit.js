@@ -1,5 +1,5 @@
 const validateCctConfig = require('./validate-cct-config');
-const ActionValidate = require('./actions/validate');
+const ValidatorDelegate = require('./delegates/validate');
 
 const cctConfigDefaults = {
   serialize: JSON.stringify,
@@ -18,11 +18,11 @@ class Toolkit {
 
   createActions() {
     const { validator } = this.cctConfig;
-    this.actionValidate = new ActionValidate({ validator });
+    this.validatorDelegate = new ValidatorDelegate({ validator });
   }
 
   validate(configuration) {
-    return this.actionValidate.validate(configuration);
+    return this.validatorDelegate.validate(configuration);
   }
 
   serialize(configuration) {

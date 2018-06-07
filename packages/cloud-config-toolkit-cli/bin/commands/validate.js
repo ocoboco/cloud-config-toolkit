@@ -6,8 +6,9 @@ const { logError } = require('../commands-util');
 
 exports.command = 'validate <path>';
 exports.desc = 'Validates the configuration file at specified path.';
+exports.handler = handler.bind(undefined, toolkit);
 
-exports.handler = async function ({ path }) {
+async function handler(toolkit, { path }) {
   try {
     await fs.access(path, fs.constants.R_OK);
   } catch (error) {
@@ -34,4 +35,4 @@ exports.handler = async function ({ path }) {
     console.log(red(JSON.stringify(errors, null, 2)));
     process.exit(1);
   }
-};
+}

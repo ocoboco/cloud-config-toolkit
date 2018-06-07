@@ -1,4 +1,4 @@
-class ActionValidate {
+class ValidatorDelegate {
   constructor({ validator }) {
     this.validator = validator;
   }
@@ -18,4 +18,4 @@ class ActionValidate {
   }
 }
 
-module.exports = ActionValidate;
+module.exports = ValidatorDelegate;
