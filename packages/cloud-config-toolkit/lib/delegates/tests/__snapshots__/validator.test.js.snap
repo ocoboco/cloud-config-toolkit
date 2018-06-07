@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ValidatorDelegate validate() returns errors when invalid 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "message": "Oops, something went wrong",
+    },
+  ],
+  "isValid": false,
+}
+`;
+
+exports[`ValidatorDelegate validate() returns no errors when valid 1`] = `
+Object {
+  "errors": Array [],
+  "isValid": true,
+}
+`;

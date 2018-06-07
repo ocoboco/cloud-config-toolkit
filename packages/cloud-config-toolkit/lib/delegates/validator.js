@@ -9,7 +9,7 @@ class ValidatorDelegate {
       return {
         isValid,
         errors: []
-      }
+      };
     };
     return {
       isValid,

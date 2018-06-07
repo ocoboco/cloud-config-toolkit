@@ -1,12 +1,10 @@
 const checkCctConfig = require('../check-cct-config');
 
-class ValidatorMock {
-  isValid() {}
-  getErrors() {}
-}
-
 const cctConfig = {
-  validator: new ValidatorMock(),
+  validator: {
+    isValid() {},
+    getErrors() {}
+  },
   serialize: JSON.stringify,
   deserialize: JSON.parse
 };
@@ -18,7 +16,7 @@ const obligatoryFields = [
 ];
 
 describe('checkCctConfig()', function () {
-  test('checks obligatory cct config object fields', function () {
+  test('checks obligatory cct config fields', function () {
     expect(function() {
       checkCctConfig({});
     }).toThrow();
@@ -37,7 +35,7 @@ describe('checkCctConfig()', function () {
     }).not.toThrow();
   });
 
-  test('checks whether validator implements Validator interface', function () {
+  test('checks whether validator conforms to Validator', function () {
     expect(function() {
       checkCctConfig({
         ...cctConfig,

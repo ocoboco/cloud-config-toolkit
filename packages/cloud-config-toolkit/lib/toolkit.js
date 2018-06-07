@@ -1,5 +1,5 @@
 const checkCctConfig = require('./check-cct-config');
-const ValidatorDelegate = require('./delegates/validate');
+const ValidatorDelegate = require('./delegates/validator');
 
 const cctConfigDefaults = {
   serialize: JSON.stringify,
