@@ -1,4 +1,4 @@
-const validateCctConfig = require('./validate-cct-config');
+const checkCctConfig = require('./check-cct-config');
 const ValidatorDelegate = require('./delegates/validate');
 
 const cctConfigDefaults = {
@@ -12,7 +12,7 @@ class Toolkit {
       ...cctConfigDefaults,
       ...cctConfig
     };
-    validateCctConfig(this.cctConfig);
+    checkCctConfig(this.cctConfig);
     this.createActions();
   }
 
