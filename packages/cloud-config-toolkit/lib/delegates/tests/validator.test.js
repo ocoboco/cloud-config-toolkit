@@ -13,7 +13,7 @@ describe('ValidatorDelegate', function () {
           }
         }
       });
-      expect(delegate.validate()).toMatchSnapshot();
+      expect(delegate.validate({})).toMatchSnapshot();
     });
 
     test('returns errors when invalid', function () {
@@ -29,7 +29,7 @@ describe('ValidatorDelegate', function () {
           }
         }
       });
-      expect(delegate.validate()).toMatchSnapshot();
+      expect(delegate.validate({})).toMatchSnapshot();
     });
   });
 });

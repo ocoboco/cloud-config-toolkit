@@ -1,5 +1,6 @@
 const checkCctConfig = require('./check-cct-config');
 const ValidatorDelegate = require('./delegates/validator');
+const ExporterDelegate = require('./delegates/exporter');
 
 const cctConfigDefaults = {
   serialize: JSON.stringify,
@@ -17,8 +18,9 @@ class Toolkit {
   }
 
   createDelegates() {
-    const { validator } = this.cctConfig;
+    const { validator, exporter } = this.cctConfig;
     this.validatorDelegate = new ValidatorDelegate({ validator });
+    this.exporterDelegate = new ExporterDelegate({ exporter, validator });
   }
 
   validate(configuration) {
@@ -31,6 +33,10 @@ class Toolkit {
 
   deserialize(string) {
     return this.cctConfig.deserialize(string);
+  }
+
+  export(configuration) {
+    return this.exporterDelegate.export(configuration);
   }
 }
 
