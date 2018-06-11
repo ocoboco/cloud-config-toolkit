@@ -1,6 +1,6 @@
 const mock = require('mock-fs');
 
-const handleFileValidation = require('../handle-file-validation');
+const handleValidation = require('../handle-validation');
 
 const toolkit = {
   deserialize: JSON.parse,
@@ -15,7 +15,7 @@ const toolkit = {
 describe('handleFileValidation()', function() {
   test('throws an error when path is incorrect', async function() {
     try {
-      await handleFileValidation(toolkit, {
+      await handleValidation(toolkit, {
         path: 'invalid-path-config.json'
       });
     } catch (e) {
@@ -25,7 +25,7 @@ describe('handleFileValidation()', function() {
 
   test('throws an error when unable to parse the content', async function() {
     try {
-      await handleFileValidation(toolkit, {
+      await handleValidation(toolkit, {
         path: 'invalid-config.json'
       });
     } catch (e) {
@@ -35,7 +35,7 @@ describe('handleFileValidation()', function() {
 
   test('throws an error when validation failed', async function() {
     try {
-      await handleFileValidation({
+      await handleValidation({
         ...toolkit,
         validate() {
           return {
@@ -52,7 +52,7 @@ describe('handleFileValidation()', function() {
   });
 
   test('does not throw errors on successful execution', async function() {
-    const result = await handleFileValidation(toolkit, {
+    const result = await handleValidation(toolkit, {
       path: 'config.json'
     });
     expect(result).toBe(true);

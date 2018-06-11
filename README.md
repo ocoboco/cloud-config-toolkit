@@ -38,10 +38,10 @@ cct download --dest config.json --version <version> [--namespace=<namespace>]
 cct ls [--namespace=<namespace>]
 ```
 
-5) Get the exported configuration file from remote storage (available when `config.export` is specified):
+5) Download the exported configuration file from remote storage (available when `config.export` is specified):
 
 ```bash
-cct export --dest exportedConfig.json --version <version> [--namespace=<namespace>]
+cct download-export --dest exportedConfig.json --version <version> [--namespace=<namespace>]
 ```
 
 6) Get the exported configuration file from the configuration file (available when `config.export` is specified):

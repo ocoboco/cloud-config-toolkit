@@ -1,9 +1,9 @@
 const fs = require('fs-extra');
 const { yellow, red } = require('chalk');
 
-const { logError } = require('../index');
+const { logError } = require('./util');
 
-async function handleFileValidation(toolkit, { path }) {
+async function handleValidation(toolkit, { path }) {
   try {
     await fs.access(path, fs.constants.R_OK);
   } catch (error) {
@@ -33,4 +33,4 @@ async function handleFileValidation(toolkit, { path }) {
   return true;
 }
 
-module.exports = handleFileValidation;
+module.exports = handleValidation;
