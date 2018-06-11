@@ -30,6 +30,7 @@ async function handleFileValidation(toolkit, { path }) {
     console.log(red(JSON.stringify(errors, null, 2)));
     throw new Error('Configuration is invalid.');
   }
+  return true;
 }
 
 module.exports = handleFileValidation;
