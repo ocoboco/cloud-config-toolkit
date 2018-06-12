@@ -12,7 +12,7 @@ const toolkit = {
   }
 }
 
-describe('handleFileValidation()', function() {
+describe('handleValidation()', function() {
   test('throws an error when path is incorrect', async function() {
     try {
       await handleValidation(toolkit, {
@@ -47,7 +47,7 @@ describe('handleFileValidation()', function() {
         path: 'config.json'
       });
     } catch (e) {
-      expect(e.message).toBe("Configuration is invalid.");
+      expect(e.message).toMatch("An error message");
     }
   });
 

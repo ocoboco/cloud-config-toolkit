@@ -1,6 +1,6 @@
 const mock = require('mock-fs');
 
-const handleFileValidation = require('../handle-export');
+const handleExport = require('../handle-export');
 
 const toolkit = {
   deserialize: JSON.parse,
@@ -9,20 +9,26 @@ const toolkit = {
       isValid: true, 
       errors: []
     };
+  },
+  export(configuration) {
+    return {
+      ...configuration,
+      exported: true
+    };
   }
-}
+};
 
-describe('handleExport()', function() {
-  // test('throws an error when path is incorrect', async function() {
-  //   try {
-  //     await handleFileValidation(toolkit, {
-  //       path: 'invalid-path-config.json'
-  //     });
-  //   } catch (e) {
-  //     expect(e.message).toBe("ENOENT, no such file or directory 'invalid-path-config.json'");
-  //   }
-  // });
-});
+// describe('handleExport()', function() {
+//   test('throws an error when destination file already exists', async function() {
+//     try {
+//       await handleExport(toolkit, {
+//         path: 'invalid-path-config.json'
+//       });
+//     } catch (e) {
+//       expect(e.message).toBe("ENOENT, no such file or directory 'invalid-path-config.json'");
+//     }
+//   });
+// });
 
 beforeAll(function() {
   console.log = jest.fn();
