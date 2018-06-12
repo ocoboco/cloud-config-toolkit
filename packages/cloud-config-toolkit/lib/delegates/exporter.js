@@ -5,6 +5,9 @@ class ExporterDelegate {
   }
 
   export(configuration) {
+    if (!this.exporter) {
+      throw new Error(`'config.exporter' is not defined.`);
+    }
     if (!this.validator.isValid(configuration)) {
       throw new Error('Configuration is invalid.');
     }
