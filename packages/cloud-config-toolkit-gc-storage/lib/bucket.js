@@ -1,7 +1,6 @@
 class Bucket {
   constructor({ bucketName, googleCloudStorage }) {
     this.googleCloudStorage = googleCloudStorage;
-    this.bucketName = bucketName;
     this.bucket = this.googleCloudStorage.bucket(bucketName);
     this.bucketExists = false;
   }
@@ -16,6 +15,8 @@ class Bucket {
     }
     this.bucketExists = true;    
   }
+
+  
 }
 
 module.exports = Bucket;

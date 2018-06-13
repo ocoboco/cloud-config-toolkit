@@ -12,6 +12,10 @@ class Storage {
       bucketName
     });
   }
+
+  async createItem(content, name, namespace) {
+    
+  }
 }
 
 module.exports = Storage;
