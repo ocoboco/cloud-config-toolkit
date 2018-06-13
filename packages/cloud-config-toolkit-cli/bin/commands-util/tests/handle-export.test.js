@@ -28,7 +28,7 @@ describe('handleExport()', function() {
         destination: 'exportedConfig.json'
       });
     } catch (e) {
-      expect(e.message).toMatchSnapshot();
+      expect(e.message).toBe(`Cannot write to destination file, a file already exists at 'exportedConfig.json'`);
     }
   });
 
@@ -39,7 +39,7 @@ describe('handleExport()', function() {
         destination: 'no-dir/exportedConfig.json'
       });
     } catch (e) {
-      expect(e.message).toMatchSnapshot();
+      expect(e.message).toBe(`ENOENT, no such file or directory 'no-dir/exportedConfig.json'`);
     }
   });
 
@@ -49,7 +49,7 @@ describe('handleExport()', function() {
       destination: 'config-dir/exportedConfig.json'
     });
     const fileContent = await fs.readFile('config-dir/exportedConfig.json', 'utf8');
-    expect(fileContent).toMatchSnapshot();
+    expect(fileContent).toBe(JSON.stringify({ prop: "value", exported: true }));
   });
 });
 

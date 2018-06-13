@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`handleExport() throws an error when destination directory does not exist 1`] = `"ENOENT, no such file or directory 'no-dir/exportedConfig.json'"`;
-
-exports[`handleExport() throws an error when destination file already exists 1`] = `"Cannot write to destination file, a file already exists at 'exportedConfig.json'"`;
-
-exports[`handleExport() writes exported config to destination file 1`] = `"{\\"prop\\":\\"value\\",\\"exported\\":true}"`;

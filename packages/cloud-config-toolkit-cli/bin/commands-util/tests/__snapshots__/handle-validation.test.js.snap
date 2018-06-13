@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`handleValidation() throws an error when path is incorrect 1`] = `"ENOENT, no such file or directory 'invalid-path-config.json'"`;
-
-exports[`handleValidation() throws an error when unable to parse the content 1`] = `"Unexpected end of JSON input"`;

@@ -19,7 +19,7 @@ describe('handleValidation()', function() {
         path: 'invalid-path-config.json'
       });
     } catch (e) {
-      expect(e.message).toMatchSnapshot();
+      expect(e.message).toBe("ENOENT, no such file or directory 'invalid-path-config.json'");
     }
   });
 
@@ -29,7 +29,7 @@ describe('handleValidation()', function() {
         path: 'invalid-config.json'
       });
     } catch (e) {
-      expect(e.message).toMatchSnapshot();
+      expect(e.message).toBe("Unexpected end of JSON input");
     }
   });
 
