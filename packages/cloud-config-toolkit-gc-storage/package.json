@@ -1,0 +1,35 @@
+{
+  "name": "cloud-config-toolkit-gc-storage",
+  "version": "0.0.1",
+  "description": "Cloud config toolkit: Google cloud storage integration",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ocoboco/cloud-config-toolkit.git"
+  },
+  "main": "index.js",
+  "keywords": [
+    "config",
+    "toolkit",
+    "google app engine",
+    "storage"
+  ],
+  "engines": {
+    "node": ">=8.3"
+  },
+  "author": "Dmitri Pavlutin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ocoboco/cloud-config-toolkit/issues"
+  },
+  "homepage": "https://github.com/ocoboco/cloud-config-toolkit#readme",
+  "dependencies": {
+    "@google-cloud/storage": "^1.7.0",
+    "ramda": "^0.25.0"
+  },
+  "devDependencies": {
+    "jest": "23.1.0"
+  }
+}
