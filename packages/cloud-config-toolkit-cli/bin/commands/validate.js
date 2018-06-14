@@ -3,7 +3,7 @@ const handleValidation = require('../commands-util/handle-validation');
 const { logError } = require('../commands-util/util');
 
 exports.command = 'validate <path>';
-exports.desc = 'Validates the configuration file at specified path.';
+exports.desc = 'Validates configuration at specified path.';
 exports.handler = async function(...args) {
   try {
     await handleValidation(toolkit, ...args);

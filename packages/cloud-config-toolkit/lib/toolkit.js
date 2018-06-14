@@ -1,6 +1,7 @@
 const checkCctConfig = require('./check-cct-config');
 const ValidatorDelegate = require('./delegates/validator');
 const ExporterDelegate = require('./delegates/exporter');
+const StorageDelegate = require('./delegates/storage');
 
 const cctConfigDefaults = {
   serialize: JSON.stringify,
@@ -18,9 +19,10 @@ class Toolkit {
   }
 
   createDelegates() {
-    const { validator, exporter } = this.cctConfig;
+    const { validator, exporter, serialize, storage } = this.cctConfig;
     this.validatorDelegate = new ValidatorDelegate({ validator });
-    this.exporterDelegate = new ExporterDelegate({ exporter, validator });
+    this.exporterDelegate = new ExporterDelegate({ exporter });
+    this.storageDelegate = new StorageDelegate({ storage, serialize });
   }
 
   validate(configuration) {
@@ -37,6 +39,10 @@ class Toolkit {
 
   export(configuration) {
     return this.exporterDelegate.export(configuration);
+  }
+
+  push(configuration, version, namespace) {
+    return this.storageDelegate.push(configuration, version, namespace);
   }
 }
 

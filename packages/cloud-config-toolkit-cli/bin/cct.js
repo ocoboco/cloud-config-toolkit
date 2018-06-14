@@ -21,5 +21,6 @@ if (result != null) {
 const argv = yargs
   .commandDir('commands')
   .demandCommand()
-  .help()
+  .help(true)
+  .version(false)
   .argv;
