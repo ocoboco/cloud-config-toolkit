@@ -94,7 +94,7 @@ Its purpose is to save configuration content on any type storage.
 
 ```
 interface Storage {
-  function createItem(content, name, namespace)
+  function createItem(name, content, namespace)
   function getItemContent(name, namespace)
   function itemExists(name, namespace)
   function getItemNames(offset, limit, namespace)

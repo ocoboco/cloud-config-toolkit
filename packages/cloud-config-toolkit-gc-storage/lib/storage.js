@@ -13,8 +13,9 @@ class Storage {
     });
   }
 
-  async createItem(content, name, namespace) {
-    
+  async createItem(name, content, namespace) {
+    const path = `/namespaces/${namespace}/${name}`;
+    await this.bucket.uploadFileToPath(path, content);
   }
 }
 

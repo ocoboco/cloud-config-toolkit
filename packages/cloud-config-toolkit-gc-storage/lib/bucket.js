@@ -16,7 +16,12 @@ class Bucket {
     this.bucketExists = true;    
   }
 
-  
+  async uploadFileToPath(path, content) {
+    await this.ensureBucketExists();
+    const file = this.bucket.file(path);
+    await file.save(content);
+    await this.bucket.upload(file);
+  }
 }
 
 module.exports = Bucket;
