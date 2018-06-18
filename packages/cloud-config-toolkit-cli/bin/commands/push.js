@@ -22,7 +22,6 @@ exports.handler = async function(...args) {
     await handlePush(toolkit, ...args);
   } catch (error) {
     logError(error);
-    console.trace(error);
     process.exit(1);
   }
 };

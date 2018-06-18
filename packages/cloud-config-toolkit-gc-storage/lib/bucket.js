@@ -9,11 +9,20 @@ class Bucket {
     if (this.bucketExists) {
       return;
     }
-    const [exists] = await this.bucket.exists();
-    if (!exists) {
-      await this.bucket.create();
+    try {
+      [ this.bucketExists ] = await this.bucket.exists();
+    } catch(error) {
+      this.bucketExists = false;
     }
-    this.bucketExists = true;    
+    if (!this.bucketExists) {
+      try {
+        await this.bucket.create();
+      } catch (error) {
+        error.explanation = `Failed to create "${this.bucket.name}" bucket.`;
+        throw error;
+      }
+      this.bucketExists = true;    
+    }
   }
 
   async uploadFileToPath(path, content) {
