@@ -44,6 +44,10 @@ class Toolkit {
   push(configuration, version, namespace) {
     return this.storageDelegate.push(configuration, version, namespace);
   }
+
+  itemExists(version, namespace) {
+    return this.storageDelegate.itemExists(version, namespace);
+  }
 }
 
 module.exports = Toolkit;

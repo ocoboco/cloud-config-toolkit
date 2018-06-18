@@ -15,20 +15,25 @@ class Storage {
   }
 
   async createItem(name, content, namespace) {
-    const path = `/namespaces/${namespace}/${name}.json`;
-    await this.bucket.uploadFileToPath(path, content);
+    const path = this.getPath(name, namespace);
+    await this.bucket.uploadFile(path, content);
   }
 
-  async getItemContent() {
-
-  }
-
-  async itemExists() {
-
-  }
-
-  async getItemNames() {
+  async getItemContent(name, namespace) {
     
+  }
+
+  async itemExists(name, namespace) {
+    const path = this.getPath(name, namespace);
+    return await this.bucket.fileExists(path);
+  }
+
+  async getItemNames(offset, limit, namespace) {
+    
+  }
+
+  getPath(name, namespace) {
+    return `/namespaces/${namespace}/${name}.json`;
   }
 }
 

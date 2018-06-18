@@ -35,7 +35,7 @@ class Bucket {
     }
   }
 
-  async uploadFileToPath(path, content) {
+  async uploadFile(path, content) {
     await this.ensureBucketExists();
     try {
       const file = this.bucket.file(path);
@@ -44,6 +44,19 @@ class Bucket {
       error.explanation = `Failed to upload "${path}" file to "${this.bucket.name}" bucket.`;
       throw error;
     }
+  }
+
+  async fileExists(path) {
+    await this.ensureBucketExists();
+    let exists = false;
+    try {
+      const file = this.bucket.file(path);
+      [ exists ] = await file.exists();
+    } catch (error) {
+      error.explanation = `Failed to check existence of "${path}" file inside "${this.bucket.name}" bucket.`;
+      throw error;
+    }
+    return exists;
   }
 }
 
