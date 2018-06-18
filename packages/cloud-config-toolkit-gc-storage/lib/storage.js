@@ -15,7 +15,7 @@ class Storage {
   }
 
   async createItem(name, content, namespace) {
-    const path = `/namespaces/${namespace}/${name}`;
+    const path = `/namespaces/${namespace}/${name}.json`;
     await this.bucket.uploadFileToPath(path, content);
   }
 
