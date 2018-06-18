@@ -25,6 +25,10 @@ class Toolkit {
     this.storageDelegate = new StorageDelegate({ storage, serialize });
   }
 
+  exportEnabled() {
+    return 'exporter' in this.cctConfig;
+  }
+
   validate(configuration) {
     return this.validatorDelegate.validate(configuration);
   }
