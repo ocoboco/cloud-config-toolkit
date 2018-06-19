@@ -83,6 +83,17 @@ class Bucket {
       throw error;
     }
   }
+
+  async getFileContent(path) {
+    try {
+      const file = this.bucket.file(path);
+      const [content] = await file.download();
+      return content.toString('utf8');
+    } catch (error) {
+      error.explanation = `Failed to download "${path}" file from "${this.bucket.name}" bucket.`;
+      throw error;
+    }
+  }
 }
 
 module.exports = Bucket;

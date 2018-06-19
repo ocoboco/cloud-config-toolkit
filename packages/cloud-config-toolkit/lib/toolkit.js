@@ -35,7 +35,7 @@ class Toolkit {
 
   export(configuration) {
     if (!this.exportEnabled()) {
-      throw new Error(`'config.exporter' is not defined.`);
+      throw new Error(`"config.exporter" is not defined.`);
     }
     return this.cctConfig.exporter.export(configuration);
   }
@@ -49,8 +49,12 @@ class Toolkit {
     return this.cctConfig.storage.itemExists(version, namespace);
   }
 
-  getItemNames(namespace, offset, limit) {
-    return this.cctConfig.storage.getItemNames(namespace, offset, limit);
+  getItemNames(namespace) {
+    return this.cctConfig.storage.getItemNames(namespace);
+  }
+
+  download(version, namespace) {
+    return this.cctConfig.storage.getItemContent(version, namespace);
   }
 }
 

@@ -20,7 +20,7 @@ async function handleExport(toolkit, { path, destination }) {
   try {
     await fs.writeFile(destination, exportedFileContent);
   } catch (error) {
-    error.explanation = 'Cannot write to destination file, check the directory existence and write permission.';
+    error.explanation = `Cannot write to destination file ${destination}, check the directory existence and write permission.`;
     throw error;
   }
   return true;

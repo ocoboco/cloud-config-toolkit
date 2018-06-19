@@ -1,10 +1,15 @@
 const toolkit = require('../toolkit-instance');
-const handlePush = require('../commands-util/handle-push');
+const handleDownload = require('../commands-util/handle-download');
 const { logError } = require('../commands-util/util');
 
-exports.command = 'push <path>';
-exports.desc = 'Pushes configuration to storage.';
+exports.command = 'download';
+exports.desc = 'Downloads configuration from storage.';
 exports.builder = {
+  'destination': {
+    alias: 'd',
+    describe: 'Download destination path',
+    demandOption: true
+  },
   'version': {
     alias: 'v',
     describe: 'Configuration version',
@@ -19,7 +24,7 @@ exports.builder = {
 };
 exports.handler = async function(...args) {
   try {
-    await handlePush(toolkit, ...args);
+    await handleDownload(toolkit, ...args);
   } catch (error) {
     logError(error);
     process.exit(1);

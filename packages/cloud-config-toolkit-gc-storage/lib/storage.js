@@ -24,7 +24,8 @@ class Storage {
   }
 
   async getItemContent(name, namespace) {
-    
+    const path = getPath(name, namespace);
+    return await this.bucket.getFileContent(path);
   }
 
   async itemExists(name, namespace) {

@@ -7,7 +7,7 @@ exports.desc = 'Lists available configuration versions on storage.';
 exports.builder = {
   'namespace': {
     alias: 'n',
-    describe: 'Namespace of the configuration',
+    describe: 'Configuration namespace',
     demandOption: false,
     default: 'default'
   }
