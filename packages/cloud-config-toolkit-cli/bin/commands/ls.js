@@ -1,15 +1,10 @@
 const toolkit = require('../toolkit-instance');
-const handlePush = require('../commands-util/handle-push');
+const handleLs = require('../commands-util/handle-ls');
 const { logError } = require('../commands-util/util');
 
-exports.command = 'push <path>';
-exports.desc = 'Push configuration to storage.';
+exports.command = 'ls';
+exports.desc = 'Lists available configuration versions on storage.';
 exports.builder = {
-  'version': {
-    alias: 'v',
-    describe: 'Version of the configurtion',
-    demandOption: true
-  },
   'namespace': {
     alias: 'n',
     describe: 'Namespace of the configuration',
@@ -19,7 +14,7 @@ exports.builder = {
 };
 exports.handler = async function(...args) {
   try {
-    await handlePush(toolkit, ...args);
+    await handleLs(toolkit, ...args);
   } catch (error) {
     logError(error);
     process.exit(1);

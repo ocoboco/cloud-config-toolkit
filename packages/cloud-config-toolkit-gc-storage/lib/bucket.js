@@ -1,3 +1,16 @@
+const R = require('ramda');
+
+const extractFileNames = R.pipe(
+  R.head,
+  R.map(
+    R.pipe(
+      R.prop('name'),
+      R.split('/'),
+      R.last
+    )
+  ),
+);
+
 class Bucket {
   constructor({ bucketName, googleCloudStorage }) {
     this.googleCloudStorage = googleCloudStorage;
@@ -57,6 +70,17 @@ class Bucket {
       throw error;
     }
     return exists;
+  }
+
+  async getFileNames(path, offset, limit) {
+    try {
+      return extractFileNames(await this.bucket.getFiles({
+        prefix: path
+      }));
+    } catch (error) {
+      error.explanation = `Failed to list files of "${path}" inside "${this.bucket.name}" bucket.`;
+      throw error;
+    }
   }
 }
 

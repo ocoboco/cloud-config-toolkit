@@ -2,6 +2,10 @@ const GoogleCloudStorage = require('@google-cloud/storage');
 
 const Bucket = require('./bucket'); 
 
+function getPath(name, namespace) {
+  return `${namespace}/${name}`;
+}
+
 class Storage {
   constructor({ projectId, bucketName, keyFilename }) {
     this.googleCloudStorage = new GoogleCloudStorage({
@@ -15,7 +19,7 @@ class Storage {
   }
 
   async createItem(name, content, namespace) {
-    const path = this.getPath(name, namespace);
+    const path = getPath(name, namespace);
     await this.bucket.uploadFile(path, content);
   }
 
@@ -24,16 +28,13 @@ class Storage {
   }
 
   async itemExists(name, namespace) {
-    const path = this.getPath(name, namespace);
+    const path = getPath(name, namespace);
     return await this.bucket.fileExists(path);
   }
 
-  async getItemNames(offset, limit, namespace) {
-    
-  }
-
-  getPath(name, namespace) {
-    return `/namespaces/${namespace}/${name}.json`;
+  async getItemNames(namespace, offset, limit) {
+    const path = getPath('', namespace);
+    return await this.bucket.getFileNames(path, offset, limit);
   }
 }
 

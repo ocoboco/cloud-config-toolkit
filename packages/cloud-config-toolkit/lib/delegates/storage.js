@@ -4,13 +4,17 @@ class StorageDelegate {
     this.serialize = serialize;
   }
 
-  async push(configuration, version, namespace) {
+  push(configuration, version, namespace) {
     const serializedConfiguration = this.serialize(configuration);
-    await this.storage.createItem(version, serializedConfiguration, namespace);
+    this.storage.createItem(version, serializedConfiguration, namespace);
   }
 
-  async itemExists(version, namespace) {
-    return await this.storage.itemExists(version, namespace);
+  itemExists(version, namespace) {
+    return this.storage.itemExists(version, namespace);
+  }
+
+  getItemNames(namespace, offset, limit) {
+    return this.storage.getItemNames(namespace, offset, limit);
   }
 }
 

@@ -52,6 +52,10 @@ class Toolkit {
   itemExists(version, namespace) {
     return this.storageDelegate.itemExists(version, namespace);
   }
+
+  getItemNames(namespace, offset, limit) {
+    return this.storageDelegate.getItemNames(namespace, offset, limit);
+  }
 }
 
 module.exports = Toolkit;
