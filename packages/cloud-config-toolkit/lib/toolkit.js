@@ -1,7 +1,4 @@
 const checkCctConfig = require('./check-cct-config');
-const ValidatorDelegate = require('./delegates/validator');
-const ExporterDelegate = require('./delegates/exporter');
-const StorageDelegate = require('./delegates/storage');
 
 const cctConfigDefaults = {
   serialize: JSON.stringify,
@@ -15,14 +12,6 @@ class Toolkit {
       ...cctConfig
     };
     checkCctConfig(this.cctConfig);
-    this.createDelegates();
-  }
-
-  createDelegates() {
-    const { validator, exporter, serialize, storage } = this.cctConfig;
-    this.validatorDelegate = new ValidatorDelegate({ validator });
-    this.exporterDelegate = new ExporterDelegate({ exporter });
-    this.storageDelegate = new StorageDelegate({ storage, serialize });
   }
 
   exportEnabled() {
@@ -30,7 +19,10 @@ class Toolkit {
   }
 
   validate(configuration) {
-    return this.validatorDelegate.validate(configuration);
+    return {
+      isValid: this.cctConfig.validator.isValid(configuration),
+      errors: this.cctConfig.validator.getErrors(configuration)
+    };
   }
 
   serialize(configuration) {
@@ -42,19 +34,23 @@ class Toolkit {
   }
 
   export(configuration) {
-    return this.exporterDelegate.export(configuration);
+    if (!this.exportEnabled()) {
+      throw new Error(`'config.exporter' is not defined.`);
+    }
+    return this.cctConfig.exporter.export(configuration);
   }
 
   push(configuration, version, namespace) {
-    return this.storageDelegate.push(configuration, version, namespace);
+    const serializedConfiguration = this.cctConfig.serialize(configuration);
+    this.cctConfig.storage.createItem(version, serializedConfiguration, namespace);
   }
 
   itemExists(version, namespace) {
-    return this.storageDelegate.itemExists(version, namespace);
+    return this.cctConfig.storage.itemExists(version, namespace);
   }
 
   getItemNames(namespace, offset, limit) {
-    return this.storageDelegate.getItemNames(namespace, offset, limit);
+    return this.cctConfig.storage.getItemNames(namespace, offset, limit);
   }
 }
 
