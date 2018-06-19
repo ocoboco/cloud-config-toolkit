@@ -2,7 +2,7 @@ const toolkit = require('../toolkit-instance');
 const handleExport = require('../commands-util/handle-export');
 const { logError } = require('../commands-util/util');
 
-exports.command = 'export <path>';
+exports.command = ['export <path>', 'e <path>'];
 exports.desc = 'Exports configuration.';
 exports.builder = {
   'destination': {

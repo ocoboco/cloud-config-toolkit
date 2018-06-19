@@ -2,7 +2,7 @@ const toolkit = require('../toolkit-instance');
 const handleDownload = require('../commands-util/handle-download');
 const { logError } = require('../commands-util/util');
 
-exports.command = 'download';
+exports.command = ['download', 'd'];
 exports.desc = 'Downloads configuration from storage.';
 exports.builder = {
   'destination': {
