@@ -32,9 +32,9 @@ class Storage {
     return await this.bucket.fileExists(path);
   }
 
-  async getItemNames(namespace, offset, limit) {
+  async getItemNames(namespace) {
     const path = getPath('', namespace);
-    return await this.bucket.getFileNames(path, offset, limit);
+    return await this.bucket.getFileNames(path);
   }
 }
 

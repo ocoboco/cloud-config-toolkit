@@ -97,7 +97,7 @@ interface Storage {
   function createItem(name, content, namespace)
   function getItemContent(name, namespace)
   function itemExists(name, namespace)
-  function getItemNames(offset, limit, namespace)
+  function getItemNames(namespace)
 }
 ```
 

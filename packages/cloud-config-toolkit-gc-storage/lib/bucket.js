@@ -72,10 +72,11 @@ class Bucket {
     return exists;
   }
 
-  async getFileNames(path, offset, limit) {
+  async getFileNames(path) {
     try {
       return extractFileNames(await this.bucket.getFiles({
-        prefix: path
+        prefix: path,
+        maxResults: 10000
       }));
     } catch (error) {
       error.explanation = `Failed to list files of "${path}" inside "${this.bucket.name}" bucket.`;
