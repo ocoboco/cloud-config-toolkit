@@ -5,6 +5,12 @@ const cctConfig = {
     isValid() {},
     getErrors() {}
   },
+  storage: {
+    createItem() {},
+    getItemContent() {},
+    itemExists() {},
+    getItemNames() {}
+  },
   serialize: JSON.stringify,
   deserialize: JSON.parse
 };
@@ -12,7 +18,8 @@ const cctConfig = {
 const obligatoryFields = [
   'validator',
   'serialize',
-  'deserialize'
+  'deserialize',
+  'storage'
 ];
 
 describe('checkCctConfig()', function () {
@@ -50,6 +57,25 @@ describe('checkCctConfig()', function () {
         ...cctConfig,
         validator: {
           getErrors() {}
+        }
+      });
+    }).toThrow();
+  });
+
+  test('checks whether storage conforms to Storage', function () {
+    expect(function() {
+      checkCctConfig({
+        ...cctConfig,
+        storage: {}
+      });
+    }).toThrow();
+
+    expect(function() {
+      checkCctConfig({
+        ...cctConfig,
+        storage: {
+          createItem() {},
+          getItemContent() {}
         }
       });
     }).toThrow();

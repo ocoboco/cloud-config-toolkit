@@ -158,11 +158,27 @@ Any command name can be used, other than `push`, `download`, `ls` and `export`.
 
 ```javascript
 commands: {
-  commandName1(facade, params) {
+  commandName1(toolkit, cliParams) {
     // ...
   },
-  commandName2(facade, params) {
+  commandName2(toolkit, cliParams) {
     // ...
   }
+}
+```
+
+`toolkit` parameter is a facade that gives access to push, download and other toolkit functions.
+
+```
+interface Toolkit {
+  validate(configuration)
+  serialize(configuration) {
+  deserialize(string)
+  push(configuration, version, namespace)
+  itemExists(version, namespace)
+  getItemNames(namespace)
+  download(version, namespace)
+  export(configuration)
+  exportEnabled()
 }
 ```
