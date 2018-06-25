@@ -54,7 +54,6 @@ describe('handleExport()', function() {
 });
 
 beforeAll(function() {
-  console.log = jest.fn();
   mock({
     'config.json': '{ "prop": "value" }',
     'exportedConfig.json': '{ "prop": "value", "exported": true }',

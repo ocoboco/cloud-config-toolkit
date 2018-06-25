@@ -60,7 +60,6 @@ describe('handleValidation()', function() {
 });
 
 beforeAll(function() {
-  console.log = jest.fn();
   mock({
     'invalid-config.json': '{ "prop": "value" ',
     'config.json': '{ "prop": "value" }',
