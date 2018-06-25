@@ -11,7 +11,7 @@ async function handleExport(toolkit, { path, destination }) {
     destinationFileExists = false;
   }
   if (destinationFileExists) {
-    throw new Error(`Cannot write to destination file, a file already exists at '${destination}'`);
+    throw new Error(`Cannot write to destination, a file already exists at '${destination}'`);
   }
   const fileContent = await fs.readFile(path, 'utf8');
   const configuration = toolkit.deserialize(fileContent);

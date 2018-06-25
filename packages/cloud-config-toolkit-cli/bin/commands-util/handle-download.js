@@ -8,7 +8,7 @@ async function handleDownload(toolkit, { version, namespace, destination }) {
     destinationFileExists = false;
   }
   if (destinationFileExists) {
-    throw new Error(`Cannot write to destination file, a file already exists at "${destination}".`);
+    throw new Error(`Cannot write to destination, a file already exists at "${destination}".`);
   }
   const versionExists = await toolkit.itemExists(version, `${namespace}/configs`);
   if (!versionExists) {
