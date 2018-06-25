@@ -56,6 +56,18 @@ cct export config.json --dest exportedConfig.json
 cct commandName --param1 value1 --param2 value2
 ```
 
+8) Show all available commands:  
+
+```
+cct help
+```
+
+Show help for an individual command, e.g. `push`:  
+
+```
+cct push help
+```
+
 ## Toolkit config `cct-config.js`
 
 In order to use Cloud config toolkit, create a configuration file `cct-config.js` in the root directory of the project.
@@ -154,7 +166,7 @@ interface Env {
 ### `config.commands` (optional)
 
 `commands` is an object which methods implement custom commands.  
-Any command name can be used, other than `push`, `download`, `ls` and `export`.  
+Any command name can be used, except those provided by toolkit (`push`, `download`, etc).
 
 ```javascript
 commands: {
@@ -167,18 +179,23 @@ commands: {
 }
 ```
 
-`toolkit` parameter is a facade that gives access to push, download and other toolkit functions.
+`toolkit` parameter is a facade that gives access to push, download and other toolkit functions:
 
 ```
 interface Toolkit {
-  validate(configuration)
-  serialize(configuration) {
+  serialize(configuration)
   deserialize(string)
-  push(configuration, version, namespace)
-  itemExists(version, namespace)
-  getItemNames(namespace)
-  download(version, namespace)
-  export(configuration)
+
+  validate(configuration)
+
   exportEnabled()
+  export(configuration)
+
+  push(configuration, version, namespace)
+
+  download(version, namespace)
+
+  getItemNames(namespace)
+  itemExists(version, namespace)
 }
 ```

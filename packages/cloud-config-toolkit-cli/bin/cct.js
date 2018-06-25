@@ -18,9 +18,12 @@ if (result != null) {
   throw error;
 }
 
-const argv = yargs
+yargs
   .commandDir('commands')
   .demandCommand()
   .help(true)
-  .version(false)
-  .argv;
+  .version(false);
+
+require('./user-defined');
+
+yargs.argv;

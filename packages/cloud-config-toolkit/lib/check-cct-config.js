@@ -11,11 +11,21 @@ const Storage = new Interface('Storage', [
   'getItemNames'
 ]);
 
+const COMMAND_NAMES = [
+  'validate', 'v',
+  'push', 'p',
+  'download', 'd',
+  'ls',
+  'download-export', 'de',
+  'export', 'e'
+];
+
 module.exports = function checkCctConfig({
   validator,
   serialize,
   deserialize,
-  storage
+  storage,
+  commands
 } = {}) {
   if (typeof validator !== 'object') {
     throw new Error('config.validator is required.');
@@ -29,6 +39,13 @@ module.exports = function checkCctConfig({
   }
   if (typeof storage !== 'object') {
     throw new Error('config.storage is required.');
+  }
+  if (typeof commands === 'object') {
+    Object.keys(commands).forEach(function(commandName) {
+      if (COMMAND_NAMES.includes(commandName)) {
+        throw new Error(`Command name "${commandName}" is pre-defined and cannot be used.`);
+      }
+    });
   }
   Interface.ensureImplements(storage, Storage);
 }
