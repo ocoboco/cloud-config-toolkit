@@ -16,7 +16,7 @@ const toolkit = {
   download: R.always('{ "prop": "value" }')
 }
 
-describe('handleDownloadExport()', function() {
+describe('handleDownload()', function() {
   test('throws an error when a file exists at destination', async function() {
     try {
       await handleDownload(toolkit, {
