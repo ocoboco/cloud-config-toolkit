@@ -28,7 +28,7 @@ describe('handleExport()', function() {
         destination: 'exportedConfig.json'
       });
     } catch (e) {
-      expect(e.message).toBe(`Cannot write to destination file, a file already exists at 'exportedConfig.json'`);
+      expect(e.message).toBe(`Cannot write to destination, a file already exists at "exportedConfig.json"`);
     }
   });
 
