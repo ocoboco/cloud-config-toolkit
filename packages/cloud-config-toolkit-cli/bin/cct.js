@@ -6,7 +6,7 @@ const chalk = require('chalk');
 const modulesAvailable = require('./modules-available');
 
 const result = modulesAvailable([
-  './cct-config.js',
+  './cct.conf.js',
   'cloud-config-toolkit'
 ]);
 

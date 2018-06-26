@@ -68,12 +68,12 @@ Show help for an individual command, e.g. `push`:
 cct push help
 ```
 
-## Toolkit config `cct-config.js`
+## Toolkit config `cct.conf.js`
 
 In order to use Cloud config toolkit, create a configuration file `cct-config.js` in the root directory of the project.
 
 ```javascript
-// `cct-config.js`
+// `cct.conf.js`
 const GaeStorage = require('cloud-config-toolkit-gae-storage');
 const Env = require('cloud-config-toolkit-env');
 const { Validation, Modification } = require('cloud-config-toolkit-ajv');
