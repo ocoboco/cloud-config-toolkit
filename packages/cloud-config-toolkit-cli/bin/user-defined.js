@@ -16,11 +16,10 @@ const commandHandlers = R.mapObjIndexed(function(func) {
 const commands = toolkit.cctConfig.commands;
 
 if (typeof commands === 'object') {
-  R.toPairs(commands).forEach(function([name, handler]) {
+  commands.forEach(function(module) {
     yargs.command({
-      command: name,
-      description: `User defined command "${name}".`,
-      handler: R.partialRight(handler, [toolkit, commandHandlers])
+      ...module,
+      handler: R.partialRight(module.handler, [toolkit, commandHandlers])
     })
     .help()
     .version(false)

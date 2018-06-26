@@ -32,23 +32,30 @@ module.exports = function checkCctConfig({
   env
 } = {}) {
   if (typeof validator !== 'object') {
-    throw new Error('config.validator is required.');
+    throw new Error('"config.validator" is required.');
   }
   Interface.ensureImplements(validator, Validator);
   if (typeof serialize !== 'function') {
-    throw new Error('config.serialize function is required.');
+    throw new Error('"config.serialize" function is required.');
   }
   if (typeof deserialize !== 'function') {
-    throw new Error('config.deserialize function is required.');
+    throw new Error('"config.deserialize" function is required.');
   }
   if (typeof storage !== 'object') {
-    throw new Error('config.storage is required.');
+    throw new Error('"config.storage" is required.');
   }
   Interface.ensureImplements(storage, Storage);
-  if (typeof commands === 'object') {
-    Object.keys(commands).forEach(function(commandName) {
+  if (Array.isArray(commands)) {
+    commands.forEach(function(module) {
+      if (!module.command) {
+        throw new Error(`"config.commands": command property is required.`);
+      }
+      if (!module.handler) {
+        throw new Error(`"config.commands": handler of "${module.command}" is missing.`);
+      }
+      const commandName = module.command.split(' ')[0];
       if (COMMAND_NAMES.includes(commandName)) {
-        throw new Error(`Command name "${commandName}" is pre-defined and cannot be used.`);
+        throw new Error(`"config.commands": name "${commandName}" is pre-defined and cannot be used.`);
       }
     });
   }

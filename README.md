@@ -90,11 +90,13 @@ module.exports = {
     // ...
   }),
   env: new Env(),
-  commands: {
-    commandName(toolkit, cliParams, envVariables) {
-            
+  commands: [{
+    command: 'command2',
+    describe: 'Command2 description',
+    handler(argv, toolkit, commandHandlers) {
+      // ...
     }
-  },
+  }],
   serialize: JSON.stringify,
   deserialize: JSON.parse
 };
@@ -166,21 +168,36 @@ interface Env {
 
 ### `config.commands` (optional)
 
-`commands` is an object which methods implement custom commands.  
-Any command name is accepted, except those provided by toolkit (`push`, `download`, etc).
+`commands` is an array of custom commands definitions (as per [yargs command module definition][YARGS_COMMAND]). 
 
 ```javascript
-commands: {
-  commandName1(argv, toolkit, commandHandlers) {
-    // ...
-  },
-  commandName2(argv, toolkit, commandHandlers) {
-    // ...
+commands: [
+  {
+    command: 'command1 <path>',
+    describe: 'Command1 description',
+    builder: {
+      destination: {
+        alias: 'd',
+        describe: 'Download destination path',
+        demandOption: true
+      }
+    },
+    handler(argv, toolkit, commandHandlers) {
+      // ...
+    }
+  }, {
+    command: 'command2',
+    describe: 'Command2 description',
+    handler(argv, toolkit, commandHandlers) {
+      // ...
+    }
   }
-}
+]
 ```
 
-`toolkit` parameter is a facade that gives access to push, download and other toolkit functions:
+`argv` parameter of `handler` contains the command line parameters.  
+
+`toolkit` parameter of `handler` is a facade that gives access to push, download and other toolkit functions:
 
 ```
 interface Toolkit {
@@ -203,7 +220,7 @@ interface Toolkit {
 }
 ```
 
-`commandHandlers` parameter contains handlers for the default commands. Use this to compose more complex commands using default ones:  
+`commandHandlers` parameter of `handler` contains handlers for the default commands. Use this to compose more complex commands using default ones:  
 
 ```
 {
@@ -216,4 +233,4 @@ interface Toolkit {
 }
 ```
 
-`argv` parameter contains the command line parameters.  
+[YARGS_COMMAND]: https://github.com/yargs/yargs/blob/master/docs/advanced.md#providing-a-command-module
