@@ -171,10 +171,10 @@ Any command name is accepted, except those provided by toolkit (`push`, `downloa
 
 ```javascript
 commands: {
-  commandName1(toolkit, argv) {
+  commandName1(argv, toolkit, commandHandlers) {
     // ...
   },
-  commandName2(toolkit, argv) {
+  commandName2(argv, toolkit, commandHandlers) {
     // ...
   }
 }
@@ -200,6 +200,19 @@ interface Toolkit {
   itemExists(version, namespace)
 
   getEnvVars()
+}
+```
+
+`commandHandlers` parameter contains handlers for the default commands. Use this to compose more complex commands using default ones:  
+
+```
+{
+  downloadExport({ version, namespace, destination })
+  download({ version, namespace, destination })
+  export({ path, destination })
+  ls()
+  push({ path, version, namespace })
+  validation({ path })
 }
 ```
 
