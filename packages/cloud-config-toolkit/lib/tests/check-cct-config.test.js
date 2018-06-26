@@ -80,4 +80,33 @@ describe('checkCctConfig()', function () {
       });
     }).toThrow();
   });
+
+  test('checks whether env conforms to Env', function () {
+    expect(function() {
+      checkCctConfig({
+        ...cctConfig,
+        env: {}
+      });
+    }).toThrow();
+
+    expect(function() {
+      checkCctConfig({
+        ...cctConfig,
+        env: {
+          dummy() {}
+        }
+      });
+    }).toThrow();
+
+    expect(function() {
+      checkCctConfig({
+        ...cctConfig,
+        env: {
+          getVars() {
+            return { var: 'value'};
+          }
+        }
+      });
+    }).not.toThrow();
+  });
 });

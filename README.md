@@ -74,13 +74,14 @@ In order to use Cloud config toolkit, create a configuration file `cct-config.js
 
 ```javascript
 // `cct.conf.js`
-const GaeStorage = require('cloud-config-toolkit-gae-storage');
+const Storage = require('cloud-config-toolkit-gae-storage');
 const Env = require('cloud-config-toolkit-env');
 const { Validation, Modification } = require('cloud-config-toolkit-ajv');
 
 module.exports = {
-  storage: new GaeStorage({
-    key: 'key'
+  storage: new Storage({
+    bucketName: 'my-bucket-for-configs',
+    keyFilename: './gc.conf.json'
   }),
   validator: new Validator(
     // ...
@@ -90,8 +91,8 @@ module.exports = {
   }),
   env: new Env(),
   commands: {
-    commandName(facade, params) {
-      
+    commandName(toolkit, cliParams, envVariables) {
+            
     }
   },
   serialize: JSON.stringify,
@@ -159,21 +160,21 @@ Use this property to specify how to access environment variables.
 
 ```
 interface Env {
-  function getVariables()
+  function getVars()
 }
 ```
 
 ### `config.commands` (optional)
 
 `commands` is an object which methods implement custom commands.  
-Any command name can be used, except those provided by toolkit (`push`, `download`, etc).
+Any command name is accepted, except those provided by toolkit (`push`, `download`, etc).
 
 ```javascript
 commands: {
-  commandName1(toolkit, cliParams) {
+  commandName1(toolkit, argv) {
     // ...
   },
-  commandName2(toolkit, cliParams) {
+  commandName2(toolkit, argv) {
     // ...
   }
 }
@@ -197,5 +198,9 @@ interface Toolkit {
 
   getItemNames(namespace)
   itemExists(version, namespace)
+
+  getEnvVars()
 }
 ```
+
+`argv` parameter contains the command line parameters.  

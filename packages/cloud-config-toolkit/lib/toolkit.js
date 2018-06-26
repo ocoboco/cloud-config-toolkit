@@ -56,6 +56,13 @@ class Toolkit {
   download(version, namespace) {
     return this.cctConfig.storage.getItemContent(version, namespace);
   }
+
+  getEnvVars() {
+    if (typeof this.cctConfig.env === 'object') {
+      return this.cctConfig.env.getVars();
+    }
+    return {};
+  }
 }
 
 module.exports = Toolkit;

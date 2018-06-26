@@ -10,6 +10,9 @@ const Storage = new Interface('Storage', [
   'itemExists',
   'getItemNames'
 ]);
+const Env = new Interface('Env', [
+  'getVars'
+]);
 
 const COMMAND_NAMES = [
   'validate', 'v',
@@ -25,7 +28,8 @@ module.exports = function checkCctConfig({
   serialize,
   deserialize,
   storage,
-  commands
+  commands,
+  env
 } = {}) {
   if (typeof validator !== 'object') {
     throw new Error('config.validator is required.');
@@ -40,6 +44,7 @@ module.exports = function checkCctConfig({
   if (typeof storage !== 'object') {
     throw new Error('config.storage is required.');
   }
+  Interface.ensureImplements(storage, Storage);
   if (typeof commands === 'object') {
     Object.keys(commands).forEach(function(commandName) {
       if (COMMAND_NAMES.includes(commandName)) {
@@ -47,5 +52,7 @@ module.exports = function checkCctConfig({
       }
     });
   }
-  Interface.ensureImplements(storage, Storage);
+  if (typeof env === 'object') {
+    Interface.ensureImplements(env, Env);
+  }
 }
