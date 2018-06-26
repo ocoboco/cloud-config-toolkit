@@ -194,10 +194,10 @@ commands: [
   }
 ]
 ```
+Command's `handler` method has the following params: 
+1) `argv` contains the command line arguments.  
 
-`argv` parameter of `handler` contains the command line parameters.  
-
-`toolkit` parameter of `handler` is a facade that gives access to push, download and other toolkit functions:
+2) `toolkit` parameter is a facade that gives access to push, download and other toolkit functions:
 
 ```
 interface Toolkit {
@@ -220,7 +220,7 @@ interface Toolkit {
 }
 ```
 
-`commandHandlers` parameter of `handler` contains handlers for the default commands. Use this to compose more complex commands using default ones:  
+3) `commandHandlers` parameter contains default commands handlers. Use this to compose more complex commands using default commands:  
 
 ```
 {
