@@ -10,6 +10,22 @@ Cloud config toolkit facilitates deployment, validation and transformation of co
 * Extend the toolkit with your *own commands*
 * *Not coupled* with anything particular: implement storage and validation interfaces with your favorite libraries.
 
+## Installation
+
+In order to use Cloud config toolkit, you need to install the CLI package globally:
+
+```bash
+npm install -g cloud-config-toolkit-cli
+```
+
+Next, inside your project's root directory, install the main package:
+
+```bash
+npm install --save cloud-config-toolkit
+```
+
+and create the configuration file `cct.conf.js` (see [configuration](#toolkit-config-cctconfjs) section).  
+
 ## Commands
 
 Cloud config toolkit provides the following set of commands.
