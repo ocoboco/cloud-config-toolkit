@@ -1,6 +1,6 @@
 # Cloud config toolkit gc storage
 
-**Cloud config toolkit google cloud storage** implements the [storage interface]() required by **Cloud config toolkit**.  
+**Cloud config toolkit google cloud storage** implements the [storage interface](https://github.com/ocoboco/cloud-config-toolkit#configstorage-required) required by **Cloud config toolkit**.  
 
 ## Installation  
 

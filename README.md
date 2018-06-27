@@ -86,7 +86,7 @@ cct push help
 
 ## Toolkit config `cct.conf.js`
 
-In order to use Cloud config toolkit, create a configuration file `cct-config.js` in the root directory of the project.
+In order to use Cloud config toolkit, create a configuration file `cct.conf.js` in the root directory of the project.
 
 ```javascript
 // `cct.conf.js`
