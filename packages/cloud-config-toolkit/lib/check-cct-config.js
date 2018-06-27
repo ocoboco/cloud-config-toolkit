@@ -1,4 +1,5 @@
 const Interface = require('./interface');
+const { PREDEFINED_COMMAND_NAMES } = require('./constants');
 
 const Validator = new Interface('Validator', [
   'isValid',
@@ -13,15 +14,6 @@ const Storage = new Interface('Storage', [
 const Env = new Interface('Env', [
   'getVars'
 ]);
-
-const COMMAND_NAMES = [
-  'validate', 'v',
-  'push', 'p',
-  'download', 'd',
-  'ls',
-  'download-export', 'de',
-  'export', 'e'
-];
 
 module.exports = function checkCctConfig({
   validator,
@@ -53,13 +45,19 @@ module.exports = function checkCctConfig({
       if (!module.handler) {
         throw new Error(`"config.commands": handler of "${module.command}" is missing.`);
       }
-      const commandName = module.command.split(' ')[0];
-      if (COMMAND_NAMES.includes(commandName)) {
-        throw new Error(`"config.commands": name "${commandName}" is pre-defined and cannot be used.`);
-      }
+      const commandNames = Array.isArray(module.command) ? module.command : [module.command];
+      checkCommandNamesAvailability(commandNames);
     });
   }
   if (typeof env === 'object') {
     Interface.ensureImplements(env, Env);
   }
+}
+
+function checkCommandNamesAvailability(commandNames) {
+  commandNames.forEach(function(commandName) {
+    if (PREDEFINED_COMMAND_NAMES.includes(commandName)) {
+      throw new Error(`"config.commands": name "${commandName}" is pre-defined and cannot be used.`);
+    }
+  });
 }
