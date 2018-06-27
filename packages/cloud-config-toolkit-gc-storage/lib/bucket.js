@@ -24,7 +24,7 @@ class Bucket {
     }
     this.exists = await this.bucketExists();
     if (!this.exists) {
-      this.createBucket();
+      await this.createBucket();
       this.exists = true;    
     }
   }
