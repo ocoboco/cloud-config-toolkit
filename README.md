@@ -132,6 +132,8 @@ interface Storage {
 }
 ```
 
+See also [cloud-config-toolkit-gc-storage](https://github.com/ocoboco/cloud-config-toolkit/tree/master/packages/cloud-config-toolkit-gc-storage) package.
+
 ### `config.validator` (required)
 
 `validator` property value must be an object that conforms to `Validator` interface.  
@@ -143,6 +145,8 @@ interface Validator {
   function getErrors(configuration)
 }
 ```
+
+See also [cloud-config-toolkit-ajv](https://github.com/ocoboco/cloud-config-toolkit/tree/master/packages/cloud-config-toolkit-ajv) package.
 
 ### `config.serialize` (required, defaults to `JSON.stringify`)
 
@@ -170,6 +174,8 @@ interface Exporter {
   function export(configuration)
 }
 ```
+
+See also [cloud-config-toolkit-ajv](https://github.com/ocoboco/cloud-config-toolkit/tree/master/packages/cloud-config-toolkit-ajv) package.
 
 ### `config.env` (optional)
 

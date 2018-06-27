@@ -27,7 +27,7 @@ module.exports = {
 
 ## Configuration
 
-`Storage` constructor accepts a configuration with properties:
+`Storage` constructor accepts a configuration object with properties:
 
 * `bucketName` - an unique bucket name where configuration files are going to be stored;
 * `keyFilename` - the path to [key file](https://cloud.google.com/docs/authentication/getting-started).

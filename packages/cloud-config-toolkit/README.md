@@ -1,6 +1,6 @@
 # Cloud config toolkit
 
-**Cloud config toolkit** package provides the main logic required by **Cloud config toolkit**.  
+**Cloud config toolkit** package provides the main logic required by the toolkit.  
 
 ## Installation  
 
