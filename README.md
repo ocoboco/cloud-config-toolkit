@@ -92,16 +92,16 @@ In order to use Cloud config toolkit, create a configuration file `cct.conf.js` 
 // `cct.conf.js`
 const Storage = require('cloud-config-toolkit-gae-storage');
 const Env = require('cloud-config-toolkit-env');
-const { Validation, Modification } = require('cloud-config-toolkit-ajv');
+const { Validator, Exporter } = require('cloud-config-toolkit-ajv');
 
 module.exports = {
   storage: new Storage({
     bucketName: 'my-bucket-for-configs',
     keyFilename: './gc.conf.json'
   }),
-  validator: new Validator(
+  validator: new Validator({
     // ...
-  ),
+  }),
   exporter: new Exporter({
     // ...
   }),
@@ -236,7 +236,7 @@ interface Toolkit {
 }
 ```
 
-3) `commandHandlers` parameter contains default commands handlers. Use this to compose more complex commands using default commands:  
+3) `commandHandlers` parameter contains default commands handlers. Use this to compose more complex commands using default ones:  
 
 ```
 {

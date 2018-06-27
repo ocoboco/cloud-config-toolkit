@@ -27,9 +27,9 @@ module.exports = {
 
 ## Configuration
 
-`Storage` constructor accepts an object with following properties:
+`Storage` constructor accepts a configuration with properties:
 
 * `bucketName` - an unique bucket name where configuration files are going to be stored;
-* `keyFilename` - the path to key file.
+* `keyFilename` - the path to [key file](https://cloud.google.com/docs/authentication/getting-started).
 
-For more details check [main documentation](https://github.com/ocoboco/cloud-config-toolkit).  
+For more details check [Cloud config toolkit documentation](https://github.com/ocoboco/cloud-config-toolkit).  

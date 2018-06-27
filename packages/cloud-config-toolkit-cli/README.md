@@ -10,4 +10,10 @@ Install the CLI package globally:
 npm install -g cloud-config-toolkit-cli
 ```
 
-For more details check [main documentation](https://github.com/ocoboco/cloud-config-toolkit).  
+Now you can use the [commands](https://github.com/ocoboco/cloud-config-toolkit#commands) provided by the toolkit, e.g.:
+
+```bash
+cct export config.json --dest exportedConfig.json
+```
+
+For more details check [Cloud config toolkit documentation](https://github.com/ocoboco/cloud-config-toolkit).  
