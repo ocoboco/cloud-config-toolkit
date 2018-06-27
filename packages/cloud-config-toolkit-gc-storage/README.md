@@ -10,7 +10,7 @@ Install the package in the project:
 npm install --save cloud-config-toolkit-gc-storage
 ```
 
-Then use `Storage` constructor in `cct.conf.js` file:
+Then use `Storage` constructor in `cct.conf.js`:
 
 ```javascript
 // `cct.conf.js`

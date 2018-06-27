@@ -4,7 +4,7 @@
 
 ## Installation  
 
-Install the package in the project:
+Install the package:
 
 ```bash
 npm install --save cloud-config-toolkit

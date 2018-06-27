@@ -11,14 +11,38 @@ Install the package in the project:
 npm install --save cloud-config-toolkit-ajv
 ```
 
-Then use `Validator` and `Exporter` constructors in `cct.conf.js` file:
+Then use `Validator` and `Exporter` constructors in `cct.conf.js`:
 
 ```javascript
 // `cct.conf.js`
 const { Validator, Exporter } = require('cloud-config-toolkit-ajv');
 
-const schema = require('path-to-config/schema');
-const keywords = require('path-to-config/keywords');
+const schema = {
+  "type": "object",
+  "properties": {
+    "foo": { "type": "string" },
+    "bar": { "type": "integer" },
+    "baz": {
+      "range": [2, 4], 
+      "exclusiveRange": true,
+      "type": "integer"
+    }
+  }
+};
+const keywords = [{
+  name: 'range',
+  definition: {
+    type: 'number',
+    compile: function (sch, parentSchema) {
+      const min = sch[0];
+      const max = sch[1];
+
+      return parentSchema.exclusiveRange === true
+        ? function (data) { return data > min && data < max; }
+        : function (data) { return data >= min && data <= max; }
+    }
+  }
+}];
 
 module.exports = {
   validator: new Validator({
