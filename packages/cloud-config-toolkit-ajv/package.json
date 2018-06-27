@@ -1,6 +1,6 @@
 {
   "name": "cloud-config-toolkit-ajv",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cloud config toolkit ajv integration",
   "scripts": {
     "test": "jest"
@@ -13,7 +13,9 @@
   "keywords": [
     "config",
     "toolkit",
-    "validate"
+    "validate",
+    "export",
+    "schema"
   ],
   "engines": {
     "node": ">=8.3"

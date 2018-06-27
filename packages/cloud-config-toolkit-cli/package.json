@@ -1,6 +1,6 @@
 {
   "name": "cloud-config-toolkit-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cloud config toolkit: command line module",
   "scripts": {
     "test": "jest"
@@ -14,7 +14,8 @@
     "toolkit",
     "download",
     "validate",
-    "backup"
+    "backup",
+    "cli"
   ],
   "bin": {
     "cct": "./bin/cct.js"

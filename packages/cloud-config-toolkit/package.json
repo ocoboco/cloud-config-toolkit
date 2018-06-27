@@ -1,6 +1,6 @@
 {
   "name": "cloud-config-toolkit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cloud config toolkit",
   "scripts": {
     "test": "jest"
@@ -26,7 +26,6 @@
     "url": "https://github.com/ocoboco/cloud-config-toolkit/issues"
   },
   "homepage": "https://github.com/ocoboco/cloud-config-toolkit#readme",
-  "dependencies": {},
   "devDependencies": {
     "jest": "^23.1.0"
   }

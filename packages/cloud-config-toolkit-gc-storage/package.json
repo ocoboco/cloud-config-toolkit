@@ -1,6 +1,6 @@
 {
   "name": "cloud-config-toolkit-gc-storage",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cloud config toolkit: Google cloud storage integration",
   "scripts": {
     "test": "jest"
@@ -13,7 +13,7 @@
   "keywords": [
     "config",
     "toolkit",
-    "google app engine",
+    "google cloud storage",
     "storage"
   ],
   "engines": {
