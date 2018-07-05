@@ -45,7 +45,7 @@ cct push config.json --version <version> [--namespace=<namespace>]
 3) Download the configuration file from remote storage:
 
 ```bash
-cct download --dest config.json --version <version> [--namespace=<namespace>]
+cct download --destination config.json --version <version> [--namespace=<namespace>]
 ```
 
 4) List available versions on remote storage:
@@ -57,13 +57,13 @@ cct ls [--namespace=<namespace>]
 5) Download the exported configuration file from remote storage (available when `config.export` is specified):
 
 ```bash
-cct download-export --dest exportedConfig.json --version <version> [--namespace=<namespace>]
+cct download-export --destination exportedConfig.json --version <version> [--namespace=<namespace>]
 ```
 
 6) Get the exported configuration file from the configuration file (available when `config.export` is specified):
 
 ```bash
-cct export config.json --dest exportedConfig.json
+cct export config.json --destination exportedConfig.json
 ```
 
 7) User defined commands to manage configuration with custom logic (available when `config.commands` is specified):
