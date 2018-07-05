@@ -13,9 +13,18 @@ const result = modulesAvailable([
 if (result != null) {
   const { error, modulePath } = result;
   if (error.code === 'MODULE_NOT_FOUND') {
-    console.log(chalk.red('Error: ') + chalk.green(modulePath) + ' not found in the project directory.\n');
+    switch (modulePath) {
+      case './cct.conf.js':
+      console.log(chalk.red('Error: ') + chalk.green('cct.conf.js') + ' configuration file not found in the project directory.');
+        break;
+      default:
+        console.log(chalk.red('Error: ') + chalk.green(modulePath) + ' not found in the project directory.');
+    }
+    
+  } else {
+    throw error;
   }
-  throw error;
+  process.exit(1);
 }
 
 yargs
