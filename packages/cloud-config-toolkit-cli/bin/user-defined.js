@@ -1,8 +1,10 @@
 const yargs = require('yargs');
 const R = require('ramda');
 
+const { logError } = require('./commands-util/util');
 const toolkit = require('./toolkit-instance');
-const commandHandlers = R.mapObjIndexed(function(func) {
+
+const commandHandlersWithToolkit = R.mapObjIndexed(function(func) {
   return R.partial(func, [toolkit]);
 }, {
   'downloadExport': require('./commands-util/handle-download-export'),
@@ -15,11 +17,18 @@ const commandHandlers = R.mapObjIndexed(function(func) {
 
 const commands = toolkit.cctConfig.commands;
 
-if (typeof commands === 'object') {
+if (Array.isArray(commands)) {
   commands.forEach(function(module) {
     yargs.command({
       ...module,
-      handler: R.partialRight(module.handler, [toolkit, commandHandlers])
+      async handler(argv) {
+        try {
+          await module.handler(argv, toolkit, commandHandlersWithToolkit);
+        } catch (error) {
+          logError(error);
+          process.exit(1);
+        }
+      }
     })
     .help()
     .version(false)
