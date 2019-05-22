@@ -26,6 +26,10 @@ npm install --save cloud-config-toolkit
 
 and create the configuration file `cct.conf.js` (see [configuration](#toolkit-config-cctconfjs) section).  
 
+## Tutorial
+
+Follow [this usage tutorial](./usage-tutorial.md) to familiarize with installation, configuration, and explore the benefits of Cloud config toolkit.  
+
 ## Commands
 
 Cloud config toolkit provides the following set of commands.
