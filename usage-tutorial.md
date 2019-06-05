@@ -79,12 +79,71 @@ npm install
 
 We're going to use Google Cloud Storage service to store the application configuration, specifically in a bucket named `CCT_DEMO`.  
 
+To access the storage, follow [these authentication steps](https://cloud.google.com/docs/authentication/getting-started) and create a key file named `gc.conf.json` in the root directory of the project.  
 
-## 5. Use helper libraries in `cct.conf.js`  
+As seen in the next section, `gc.conf.json` is used by `cloud-config-toolkit-gc-storage`.  
+
+## 5. Create application configuration schema  
+
+To validate application configuration, we're going to use [ajv](https://github.com/epoberezkin/ajv): a JSON schema validator.  
+
+`cloud-config-toolkit-ajv` is a wrapper around `ajv`.  
+
+Let's create a file `schema.js` with a JSON schema for a simple application configuration:
+
+```javascript
+// schema.js
+
+module.exports = {
+  location: {
+    type: 'object',
+    required: ['city', 'country'],
+    properties: {
+      city: {
+        type: 'string'
+      },
+      country: {
+        type: 'string'
+      },
+      continent: {
+        type: 'string',
+        default: 'Europe'
+      }
+    }
+  }
+};
+```
+
+According to the above JSON schema, the following application configuration is valid:
+
+```json
+{
+  "location": {
+    "city": "New York",
+    "country": "USA",
+    "continent": "North America"
+  }
+}
+```
+
+However, the following application configuration is invalid, because the required property `city` is missing:
+
+```json
+{
+  "location": {
+    "country": "Great Britain",
+    "continent": "Europe"
+  }
+}
+```
+
+## 6. Use helper libraries in `cct.conf.js`  
 
 Let's update `cct.conf.js` with the following implementation:
 
 ```javascript
+// cct.conf.js
+
 const { Validator, Exporter } = require('cloud-config-toolkit-ajv');
 const Storage = require('cloud-config-toolkit-gc-storage');
 
@@ -92,22 +151,15 @@ const schema = require('./schema');
 
 module.exports = {
   validator: new Validator({
-    schema,
-    keywords
+    schema
   }),
   exporter: new Exporter({
-    schema,
-    keywords
+    schema
   }),
   storage: new Storage({
     bucketName: 'CCT_DEMO',
     keyFilename: './gc.conf.json'
   }),
-  env: {
-    getVars() {
-      return process.env;
-    }
-  },
   serialize: JSON.stringify,
   deserialize: JSON.parse
 };
