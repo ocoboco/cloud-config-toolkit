@@ -30,7 +30,6 @@ module.exports = {
   storage: null,
   validator: null,
   exporter: null,
-  env: null,
   serialize: JSON.stringify,
   deserialize: JSON.parse
 };
@@ -41,7 +40,6 @@ Each property in the above object has the meaning:
 * `storage`: save configuration content on any type of storage
 * `validator`: validate the configuration against some schema or validation rules
 * `exporter`: transform the original configuration file, e.g. fill with default values
-* `env`: how to access environment variables
 * `serialize`: a function that serializes the configuration object into a raw string representation
 * `deserialize`: a function that deserializes a raw string representation into the configuration object
 
@@ -75,21 +73,26 @@ To install the dependencies, run the command:
 npm install
 ```
 
+Then install the cli tool globally:
+
+```
+npm install -g cloud-config-toolkit-cli
+```
+
+
 ## 4. Configure Google Cloud Storage access
 
 We're going to use Google Cloud Storage service to store the application configuration: into a bucket named `cct-demo-configs`.  
 
 To setup the access to storage, follow [these authentication steps](https://cloud.google.com/docs/authentication/getting-started) and create a key file named `gc.conf.json` in the root directory of the project.  
 
-`gc.conf.json` is used by `cloud-config-toolkit-gc-storage`, which is a facade around Google Cloud Storage.  
+`gc.conf.json` is used by `cloud-config-toolkit-gc-storage`, which is a wrapped around Google Cloud Storage.  
 
 ## 5. Create the application configuration schema  
 
-To validate the application configuration, we're going to use [ajv](https://github.com/epoberezkin/ajv) JSON schema validator.  
+To validate the application configuration we're going to use [ajv](https://github.com/epoberezkin/ajv) JSON schema validator. `cloud-config-toolkit-ajv` helper library permits effortless usage of `ajv` in cloud config toolkit.  
 
-`cloud-config-toolkit-ajv` is a facade around `ajv`.    
-
-Let's create a file `schema.js` with a schema that validates a simple application configuration: a city location.  
+Let's create a file `schema.js` with a schema that validates a simple application configuration: the location of a city.  
 
 ```javascript
 // schema.js
@@ -112,7 +115,7 @@ module.exports = {
 };
 ```
 
-According to this JSON schema, the following application configuration is valid:
+According to this JSON schema, the following application configuration is *valid*:
 
 ```json
 {
@@ -122,7 +125,7 @@ According to this JSON schema, the following application configuration is valid:
 }
 ```
 
-Contrary, the following application configuration is invalid, because the required property `city` is missing:
+Contrary, the following application configuration is *invalid*, because the required property `city` is missing:
 
 ```json
 {
@@ -161,7 +164,7 @@ module.exports = {
 
 `Validator` takes care of validating the configuration against the schema in `schema.js`.
 
-`Exporter` makes transformations to configuration, e.g. filling with defaults. According to schema `continent` property is not obligatory and defaults to `'Europe'`.  
+`Exporter` makes transformations to configuration, e.g. filling with defaults. According to schema, `continent` property is not obligatory and defaults to `'Europe'`.  
 
 `Storage` class is instantiated with the bucket name `'cct-demo-configs'` (where the application configuration files are stored) and remote storage access key file `'./gc.conf.json'`.  
 
@@ -182,7 +185,7 @@ Using Cloud config toolkit, run the command to validate the application configur
 cct validate application-config.json
 ```
 
-Because the application config doesn't have the required property `country`, the validation command outputs an error:  
+Because `application-config.json` doesn't have the required property `country`, the validation command outputs an error:  
 
 ```json
 [
@@ -218,7 +221,7 @@ The command does not return any output, meaning that `application-config.json`  
 
 ## 8. Export application configuration
 
-According to schema `continent` property is optional. If not specified, `continent` defaults to `'Europe'`.  
+According to schema, the `continent` property is optional. If not specified, `continent` defaults to `'Europe'`.  
 
 Let's remove `continent` property from `application-config.json` file:
 
@@ -229,25 +232,25 @@ Let's remove `continent` property from `application-config.json` file:
 }
 ```
 
-Let's execute the validation command:
+And execute the validation command:
 
 ```
 cct validate application-config.json
 ```
 
-As expected, the command ran successfully, meaning that that `application-config.json` is valid.
+As expected, the command ran successfully, meaning that `application-config.json` is valid.
 
-Relying on defaults is convenient. Having the possibility to rely on schema defaults allows writing minimal application configuration files.  
+Defaults are convenient. Having the possibility to rely on schema defaults allows writing minimal application configuration files.  
 
-However, if the consumer application would like to use `application-config.json`, it would not know what value `continent` field has. To solve this problem, let's use the export command:
+But there is a downside. If the configuration consumer would like to use `application-config.json`, it would not know what the value of `continent` (the consumer should not be concerned about schema or config management details). To solve this problem, let's use the export command:
 
 ```
 cct export -d application-config-exported.json application-config.json
 ```
 
-The export command uses `application-config.json` and the defaults from the schema, and generates `application-config-exported.json` that contains all the properties.  
+The export command uses `application-config.json` and the defaults from the schema, then  generates `application-config-exported.json` that contains all the properties.  
 
-Looking at `application-config-exported.json`, it now has all the properties and can be consumed by the application:
+Looking at `application-config-exported.json`, it has all the properties and can be consumed by the application:
 
 ```json
 {"city":"London","country":"Great Britain","continent":"Europe"}
@@ -255,15 +258,15 @@ Looking at `application-config-exported.json`, it now has all the properties and
 
 ## 9. Push and download application configuration
 
-The real power of Cloud config toolkit comes when you want to store different configurations on remote storage. Doing so is pretty simple.  
+The benefits of Cloud config toolkit are visible when you want to store different versions of application configuration on remote storage.  
 
-Let's store the version `1.0.0` of `application-config.json` on Google Cloud Storage:
+Let's label `application-config.json` with version `1.0.0`, and push it to Google Cloud Storage:
 
 ```
 cct push -v 1.0.0 application-config.json
 ```
 
-To list the versions pushed to storage, run the command:
+To list the versions available on the remote storage, run the command:
 
 ```bash
 cct ls
@@ -277,16 +280,15 @@ As expected, the list command outputs only one version:
 
 You can push as many versions of the application configuration as you want. The only restriction is that versions are immutable.  
 
-To download an application configuration version simply use the command:
+To download from remote storage an application configuration version use the command:
 
 ```
 cct download -v 1.0.0 -d application-config-v1.0.0.json
 ```
 
-The file `application-config-v1.0.0.json` has the application configuration of version `1.0.0`.  
+The file `application-config-v1.0.0.json` is the application configuration of version `1.0.0`.  
 
-
-To download an application configuration already filled with defaults (aka exported), use the download export command:
+To download an application configuration already filled with defaults (a.k.a. exported), use the download export command:
 
 ```
 cct download-export -v 1.0.0 -d application-config-exported-v1.0.0.json
@@ -294,3 +296,4 @@ cct download-export -v 1.0.0 -d application-config-exported-v1.0.0.json
 
 The file `application-config-exported-v1.0.0.json` contains the exported application configuration of version `1.0.0`. This is the configuration ready to be consumed by your application.  
 
+Use download export command to download a configuration version ready to be consumed by your application. Simply require `application-config-exported-v1.0.0.json` directly inside of your application for runtime usage. 
